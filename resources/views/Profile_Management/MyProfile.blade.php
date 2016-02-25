@@ -11,67 +11,62 @@
 </head>
 <body>
 
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">KidoLearners</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                @if (Auth::guest())
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                @elseif(session()->has('user'))
+                    <li class="active"><a href="#">My Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>
+                            <li><a href="#">Upload Profile Picture</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="#">Page 3</a></li>
+                @endif
 
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ url('/CreateProfile') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="{{ url('/Login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                @elseif(session()->has('user'))
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> {{ Auth::user()->Name }}</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
+    <h3>Collapsible Navbar</h3>
+    <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
+    <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+</div>
 
 
-
-    <hr>
-    <?php  $username='John';?>
-
-
-    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-        <!-- Left Side Of Navbar -->
-        <ul class="nav navbar-nav">
-            <li><a href="{{ url('/home') }}">Home</a></li>
-            <li><a href="{{ url('/John') }}"><?php $username; ?></a></li>
-        </ul>
-
-
-        <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right">
-
-            <!-- Authentication Links -->
-            @if (Auth::guest())
-                <li><a href="{{ url('/Login') }}">Login</a></li>
-               {{--<!--<li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>-->--}}
-               <!-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Settings<span class="caret"></span>
-                        </a>
-                    <ul class="dropdown-menu" role="menu">
-                      {{--  <li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>
-                        <li><a href="{{ url('/MyDetails') }}">View My Details</a></li>--}}
-
-                    </ul>
-
-                </li>-->
-               <!-- <li><a href="{{ url('/register') }}">Register</a></li>-->
-
-            @else
-               {{-- <img src="{{asset('Uploads/'.$reg->ProfilePicture)}}" height="180" width="150" class="img-rounded">--}}
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->Name }} <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-
-                        <li><a href="{{ url('/ProfilePicture') }}">Upload Profile Picture</a></li>
-                        <li><a href="{{ url('/MyChildDetails') }}">View My Child</a></li>
-                        <li><a href="{{ url('/MyDetails') }}">View My Details</a></li>
-                        <li><a href="{{ url('/Child') }}">Add More Child</a></li>
-                        <li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>
-                        <li><a href="{{ url('/Login') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                    </ul>
-                </li>
-            @endif
-        </ul>
-    </div>
-    </div>
-
+@yield('content')
 
 </body>
 </html>
