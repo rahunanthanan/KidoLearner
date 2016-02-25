@@ -17,6 +17,8 @@ use Error;
 use Session;
 use Alert;
 use App\Providers\SweetAlertServiceProvider;
+use Validator;
+use Redirect;
 
 
 
@@ -60,29 +62,62 @@ class CourseController extends Controller
   public function store()
     {
 
+        // validation fields
+        $rules = array(
+            'name' => 'Required',
+            'category' => 'Required',
+            'description'=>'Required',
+            'filefield'=>'Required',
+            'date'=>'Required'
 
 
-        $file = Request::file('filefield');
-        $extension = $file->getClientOriginalExtension();
-        Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
+        );
+
+        $validation = Validator::make(Input::all(),$rules);
+
+        if( $validation->passes() ) {
+
+            $course = new Course();
+            $course->name = Input::get('name');
+            $course->category = Input::get('category');
+            $course->description = Input::get('description');
 
 
-        $destinationPath = 'Uploads/';
-        $filename = $file->getClientOriginalName();
-        Input::file('filefield')->move($destinationPath, $filename);
+            $file = Request::file('filefield');
 
 
-          $course = new Course();
-          $course->name = Input::get('name');
-          $course->category = Input::get('category');
-          $course->description = Input::get('description');
-          $course->img =$file->getClientOriginalName();
-          $course->date = Input::get('date');
-          $course->save();
+            if ($file !== null) {
+                $extension = $file->getClientOriginalExtension();
+                Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
 
-          //Alert::message('Thanks for comment!')->persistent('Close');
 
-          return redirect('courses');
+                $destinationPath = 'Uploads/';
+                $filename = $file->getClientOriginalName();
+                Input::file('filefield')->move($destinationPath, $filename);
+                $course->img =$file->getClientOriginalName();
+            }
+
+
+
+
+            $course->date = Input::get('date');
+            $course->save();
+
+            Alert::success('Successfully Lesson Added');
+
+            return redirect('courses');
+
+
+        }
+
+
+        else {
+
+            return redirect('courses/create')->withErrors($validation);
+
+        }
+
+
     }
 
   public function edit($id)
