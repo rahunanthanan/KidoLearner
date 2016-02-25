@@ -35,15 +35,9 @@
                         else
                             return false; });
 
-
-
         </script>
 
     @endif
-
-
-
-
 
 
     <hr>
@@ -62,11 +56,11 @@
                 <td><a href="{{route('subCategory.show',$book->id)}}" class="btn btn-primary">Add Subject</a></td>
                 <td><a href="{{route('category.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
                 <td>
-                    {!! Form::open(['method' => 'DELETE','onsubmit' => 'return ConfirmDelete()', 'route'=>['category.destroy', $book->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'onsubmit' => 'return ConfirmDelete()', 'route'=>['category.destroy', $book->id]]) !!}
 
 
 
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger' , 'name' =>'delcat','onsubmit' => 'return ConfirmDelete()']) !!}
                     {!! Form::close() !!}
 
                 </td>
