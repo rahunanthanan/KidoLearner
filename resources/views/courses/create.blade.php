@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <h1>Create Course</h1>
+    <h1>Create Lesson</h1>
     {{--{!! Form::open(['url'=>'courses'],['files=>true'])!!}--}}
     <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('category') }}"/>
 
