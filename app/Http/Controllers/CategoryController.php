@@ -121,12 +121,15 @@ class CategoryController extends Controller{
 
 
 
-
         Session::flash('flash_category_delete','');
 
-        Category::find($id)->delete();
-        return redirect('category');
+      //  $result=Input::get('onsubmit');
 
+        //if( $result == 'true') {
+
+            Category::find($id)->delete();
+            return redirect('category');
+       // }
     }
 
 }
