@@ -36,7 +36,7 @@
         <label for="">Activity</label>
         <select class="form-control input-sm" name="subcategory" id="subcategory">
 
-            <option value=""></option>
+            <option value="" onclick="categorizeCourse"></option>
 
 
         </select>
@@ -102,9 +102,7 @@
                         });
 
 
-
                     </script>
-
 
                     {!! Form::close() !!}
 
