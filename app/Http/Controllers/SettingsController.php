@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Hash;
 //use CreateProfile;
 use Mail;
+use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Session;
@@ -24,7 +25,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 //use JsonSchema\Validator;
@@ -35,7 +36,7 @@ class SettingsController extends Controller
 
     function getViewChangePassword()
     {
-      return view('Profile_Management.ChangePassword');
+        return view('Profile_Management.ChangePassword');
 
     }
 
@@ -113,29 +114,38 @@ class SettingsController extends Controller
 
         else
         {
-          //  $username=Auth::user()->UserName;
-           // DB::table('registration')
-           //     ->where('UserName',$username);
-           // $user= new User;
-          //$user = User::find(Auth::user()->UserName);
-            $username=Input::get('l_user_name');
-            $oldpwd = Input::get('old_password');
-            $newpwd = Input::get('new_password');
-           $name='umamuruges2994@gmail.com';
-            $pwd=Hash::make($newpwd);
+            //$id = Auth::user()->ID;
+            session()->put('user','email');
+            $login_id=Input::get('login_id');
+            //$login_id=19;
+            if(Auth::loginUsingId($login_id))
+            {
+                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
 
-            DB::table('user')
-                ->where('UserName', $name)
-                ->update(['Password' => $pwd]);
-            $data = ['title' => 'Your Password has been changed!!'];
-            Mail::send('Profile_Management.Content', $data, function ($m) {
+            }
+            /*//  $username=Auth::user()->UserName;
+             // DB::table('registration')
+             //     ->where('UserName',$username);
+             // $user= new User;
+            //$user = User::find(Auth::user()->UserName);
+              $username=Input::get('l_user_name');
+              $oldpwd = Input::get('old_password');
+              $newpwd = Input::get('new_password');
+             $name='umamuruges2994@gmail.com';
+              $pwd=Hash::make($newpwd);
 
-                $m->to('umamuruges2994@gmail.com', 'Tester');
-                $m->subject('Kido Learners!!');
-            });
+              DB::table('user')
+                  ->where('UserName', $name)
+                  ->update(['Password' => $pwd]);
+              $data = ['title' => 'Your Password has been changed!!'];
+              Mail::send('Profile_Management.Content', $data, function ($m) {
+
+                  $m->to('umamuruges2994@gmail.com', 'Tester');
+                  $m->subject('Kido Learners!!');
+              });
 
 
-            return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+              return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');*/
 
         }
 
@@ -249,7 +259,7 @@ class SettingsController extends Controller
                 ->update(['ProfilePicture' => $filename]);
 
 
-           return Redirect::to('Success3')->with('message3', 'SUCCESSFULLY CHANGED!!');
+            return Redirect::to('Success3')->with('message3', 'SUCCESSFULLY CHANGED!!');
 
         }
 
