@@ -203,7 +203,6 @@ class SettingsController extends Controller
     {
         ini_set('xdebug.max_nesting_level', 200);
 
-
         $validator = Validator::make(
             [
                 'Picture' =>Input::get('filefield'),
@@ -228,7 +227,7 @@ class SettingsController extends Controller
             Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
 
 
-            $destinationPath = 'C:\wamp\www\Registration\Uploads';
+            $destinationPath = 'C:\wamp\www\KidoLearner\Uploads';
             $filename = $file->getClientOriginalName();
             Input::file('filefield')->move($destinationPath, $filename);
 

@@ -42,7 +42,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>
-                            <li><a href="#">Upload Profile Picture</a></li>
+                            <li><a href="{{ url('/ProfilePicture') }}">Upload Profile Picture</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Page 2</a></li>
