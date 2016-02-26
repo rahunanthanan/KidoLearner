@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 //use App\Http\Requests\Request;
 use App\User;
 use App\Http\Requests;
-use views\Profile_Management\Content;
+//use views\Profile_Management\Content;
 
 //use Illuminate\Support\Facades\Mail;
 use Fail;
@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
+use Alert;
+
+use App\Providers\SweetAlertServiceProvider;
 use Illuminate\Support\Facades\Request;
 //use JsonSchema\Validator;
 
@@ -45,6 +49,7 @@ class SignUpController extends Controller
 
     function success()
     {
+        Session::flash('flash_sucess','');
         return view('Profile_Management.Success');
 
     }
@@ -67,27 +72,29 @@ class SignUpController extends Controller
 
     }
 
-    /*****Post Register Date*****/
+    /*****Register Parent*****/
     public function postRegister()
     {
+        ini_set('xdebug.max_nesting_level', 200);
         $v = Validator::make(Input::all(), User::$rules);
 
         //check if validator fails
-
-        if ($v->fails()) {
-            // return Redirect::to('Fail')->withErrors($v)->withInput()->with('message', 'SINUP FAILED');
+        if ($v->fails())
+        {
             return view('Profile_Management.Create_New_Individual_Profile', ['errors' => $v->errors()]);
-        } //check if validator is scuccess
-        else {
+        }
+
+        else
+        {
             //To attach a file
-           /* $file = Request::file('filefield');
-            $extension = $file->getClientOriginalExtension();
-            Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
+            /* $file = Request::file('filefield');
+             $extension = $file->getClientOriginalExtension();
+             Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
 
 
-            $destinationPath = 'C:\wamp\www\Registration\Uploads';
-            $filename = $file->getClientOriginalName();
-            Input::file('filefield')->move($destinationPath, $filename);*/
+             $destinationPath = 'C:\wamp\www\Registration\Uploads';
+             $filename = $file->getClientOriginalName();
+             Input::file('filefield')->move($destinationPath, $filename);*/
 
             $user = new User;
 
@@ -97,8 +104,7 @@ class SignUpController extends Controller
             $user->remember_token = Input::get('_token');
 
             $user->save();
-
-
+            // Alert::success('Successfully Registered');
             $data = ['title' => 'Welcome to Kido Learners!!'];
             Mail::send('Profile_Management.Content', $data, function ($m) {
 
@@ -106,35 +112,11 @@ class SignUpController extends Controller
                 $m->subject('Welcome to Kido Learners!!');
             });
 
-            /*$file = Input::file('filefield');
-            $input = array('filefield' => $file);
-            $rules = array(
-                'filefield' => 'image'
-            );*/
-
-
-            //$validator = Validator::make($input, $rules);
-
-            //if ($validator->fails()) {
-            // return Redirect::to('CreateProfile')->withErrors($validator)->withInput()->with('message', 'SIGNUP FAILED1');
-
-            /*} else {
-                $destinationPath = 'uploads/';
-                $filename = $file->getClientOriginalName();
-                Input::file('filefield')->move($destinationPath, $filename);
-
-                $data = ['Fail' => 'Welcome to Ministry Of Education!!'];
-                Mail::send('content_mail', $data, function ($m) {
-                    $m->to(Input::get('user_name'), 'Tester');
-                    $m->subject('Welcome to Ministry Of Education!!');
-                });
-            }*/
-
-            return Redirect::to('Success')->with('message', 'Thanks for registering Please Login!');
-        }
+            return Redirect::to('Success');
 
         }
-
     }
+
+}
 
 

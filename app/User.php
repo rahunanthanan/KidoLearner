@@ -46,6 +46,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'name' => 'required',
         'email' => 'required|email|unique:user',
         'password' => 'required|alphaNum|min:3',
-        'c_password' => 'required|min:3|same:password'
+        'ConfirmPassword' => 'required|min:3|same:password'
     );
 }
