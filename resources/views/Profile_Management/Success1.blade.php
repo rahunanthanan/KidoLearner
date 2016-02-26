@@ -23,8 +23,8 @@
     </div>
 
     <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('MyProfile') }}">
-
-        <li><a href="{{ url('/MyProfile') }}">Go to My Profile</a></li>
+        Click here to login again
+        <li><a href="{{ url('/MyProfile') }}">Login</a></li>
     </form>
     <br>
 

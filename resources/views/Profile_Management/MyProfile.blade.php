@@ -12,27 +12,37 @@
 <body>
 
 <nav class="navbar navbar-inverse">
+
     <div class="container-fluid">
+
         <div class="navbar-header">
+
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
             <a class="navbar-brand" href="#">KidoLearners</a>
+
         </div>
+
+
         <div class="collapse navbar-collapse" id="myNavbar">
+
             <ul class="nav navbar-nav">
+
                 @if (Auth::guest())
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
+
                 @elseif(session()->has('user'))
                     <li class="active"><a href="#">My Home</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('/ChangePassword') }}">Change Password</a></li>
-                            <li><a href="#">Upload Profile Picture</a></li>
+                            <li><a href="{{ url('/ProfilePicture') }}">Upload Profile Picture</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Page 2</a></li>
@@ -40,11 +50,15 @@
                 @endif
 
             </ul>
+
+
+
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/CreateProfile') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="{{ url('/Login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="{{ url('/LoginUser') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
                 @elseif(session()->has('user'))
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-log-in"></span> {{ Auth::user()->Name }}</a>
@@ -54,15 +68,16 @@
                         </ul>
                     </li>
                 @endif
+
             </ul>
+
         </div>
+
     </div>
 </nav>
 
 <div class="container">
-    <h3>Collapsible Navbar</h3>
-    <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
-    <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+
 </div>
 
 

@@ -153,13 +153,13 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('Success3', 'SignUpController@success3');
 
-    Route::get('Login', 'UserController@getViewLogin');
-    Route::post('Login', 'UserController@postLogin');//
+    Route::get('LoginUser', 'UserController@getViewLogin');
+    Route::post('LoginUser', 'UserController@postLogin');//
 
     Route::get('MyProfile', 'UserController@getViewMyProfile');
 
     Route::get('ChangePassword', 'SettingsController@getViewChangePassword');
-    Route::post('ChangePassword', 'SettingsController@Change');
+    Route::post('ChangePassword', 'SettingsController@changePassword');
 
     Route::get('MyDetails', 'SettingsController@loadMyDetails');
     Route::post('Logout', 'UserController@getSignOut');
