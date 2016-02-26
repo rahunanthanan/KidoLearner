@@ -240,8 +240,6 @@ class SettingsController extends Controller
                     'filefield' => 'image'
                 );
 
-                $name = 'umamuruges2994@gmail.com';
-
                 DB::table('user')
                     ->where('ID', $loginId)
                     ->update(['ProfilePicture' => $filename]);
