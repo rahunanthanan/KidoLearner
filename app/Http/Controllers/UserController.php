@@ -32,10 +32,11 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 class UserController extends Controller
 {
 
-   // use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    // use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     function getViewLogin()
     {
+        ini_set('xdebug.max_nesting_level', 200);
         return view('Profile_Management.Login');
     }
 
@@ -102,12 +103,13 @@ class UserController extends Controller
 
     public function postLogin()
     {
+        ini_set('xdebug.max_nesting_level', 200);
 
         $validator = Validator::make(
-          [
-              'UserName'=>Input::get('l_user_name'),
-              'Password'=>Input::get('l_password'),
-          ],
+            [
+                'UserName'=>Input::get('l_user_name'),
+                'Password'=>Input::get('l_password'),
+            ],
             [
                 'UserName' => 'required|email',
                 'Password'=> 'required|min:3',
@@ -131,8 +133,11 @@ class UserController extends Controller
 
             //if(Auth::attempt)
 
+
             if(Auth::attempt(['email' => $username, 'password' => $password]))
             {
+                $id = Auth::user()->ID;
+                session()->put('user',$id);
                 /*session()->put('registration',$username);*/
                 return view('Profile_Management.MyProfile');
             }
@@ -151,7 +156,7 @@ class UserController extends Controller
         session()->put('user','token');
         //return session()->get('user');
         session()->forget('user');
-       //Auth::logout();
+        //Auth::logout();
         return view('Profile_Management.Create_New_Individual_Profile');
 
     }

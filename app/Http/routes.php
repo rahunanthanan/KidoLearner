@@ -148,8 +148,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('Success3', 'SignUpController@success3');
 
-    Route::get('Login', 'UserController@getViewLogin');
-    Route::post('Login', 'UserController@postLogin');//
+    Route::get('LoginUser', 'UserController@getViewLogin');
+    Route::post('LoginUser', 'UserController@postLogin');//
 
     Route::get('MyProfile', 'UserController@getViewMyProfile');
 
