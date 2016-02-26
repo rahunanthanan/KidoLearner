@@ -8,16 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+
 </head>
 <body>
 
+@if(Session::has('flash_success'))
+    <script>
+        sweetAlert("Hello world!");
+    </script>
 
+@endif
 
 <div class="container">
-
-
-
-
 
     <h1 class="text-muted text-center">
         Recover Password
@@ -25,81 +29,78 @@
 
     <hr>
 
-
-
-
     <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('/RecoverPassword') }}">
 
-
         <div class="form-group">
-
             <label class="control-label col-md-4" for="r_email">User Name:</label>
-
             <div class="control-label col-md-1"></div>
-
             <div class="col-md-4">
                 <input type="text" class="form-control" name="r_email" id="r_email" placeholder="eg: xyz@abc.com">
-                {{-- @if ($errors->has('email')) <p class="help-block"><font color="red">{{ $errors->first('email') }}</font></p> @endif--}}
             </div>
-
         </div>
 
-
-
         <div class="form-group">
-
             <label class="control-label col-md-4" for="r_new_password">New Password:</label>
-
             <div class="control-label col-md-1"></div>
-
             <div class="control-label col-md-4">
                 <input type="password" name="r_new_password" class="form-control " id="r_new_password">
             </div>
-
         </div>
 
         <div class="form-group">
-
             <label class="control-label col-md-4" for="r_confirm_password">Confirm Password:</label>
-
             <div class="control-label col-md-1"></div>
-
             <div class="control-label col-md-4">
                 <input type="password" name="r_confirm_password" class="form-control " id="r_confirm_password">
             </div>
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
         </div>
 
         <div class="form-group">
 
-            <div class="col-md-offset-8 col-md-5">
+            <div class="col-md-20">
+                <?php if(isset($errors)){ ?>
 
-                <button type="submit" class="btn btn-lg btn btn-success" name="reset" id="reset" value="Change">Reset Password</button>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="button" class="btn btn-default" name="l_btnCancel" id="l_btnCancel">Cancel</button>
+                @if (count($errors) > 0)
+
+                    <ul style='color:#ff0047;  list-style: none;  margin: 20px'  class="center-container">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                @endif
+
+                <?php } ?>
+
+                <?php if(isset($status)){ ?>
+
+                <div class="alert alert-danger">
+                    {{ $status }}
+                </div>
+
+                <?php } ?>
+
+                <?php if(isset($message)){
+                    echo "<div style='color:#ff0047'>$message</div>";}?>
 
             </div>
 
         </div>
 
+        <div class="form-group">
+            <div class="col-md-offset-8 col-md-5">
+                <button type="submit" class="btn btn-lg btn btn-success" name="reset" id="reset" value="Change">Reset Password</button>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <button type="button" class="btn btn-default" name="l_btnCancel" id="l_btnCancel"> <a href="/MyProfile">Cancel</a></button>
+            </div>
+
+        </div>
 
     </form>
 
-
 </div>
 
-
-
 </body>
+
 </html>

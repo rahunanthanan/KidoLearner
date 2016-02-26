@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Validator;
 //use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Alert;
 //use JsonSchema\Validator;
 
 class SettingsController extends Controller
@@ -153,7 +154,7 @@ class SettingsController extends Controller
                 'ConfirmPassword' => Input::get('r_confirm_password')
             ],
             [
-                'email' => 'email',
+                'email' => 'required|email',
                 'NewPassword' => 'required|min:3',
                 'ConfirmPassword' => 'required|min:3|same:NewPassword'
             ],
@@ -169,33 +170,33 @@ class SettingsController extends Controller
 
         else
         {
-            //  $username=Auth::user()->UserName;
-            // DB::table('registration')
-            //     ->where('UserName',$username);
-            // $user= new User;
-            //$user = User::find(Auth::user()->UserName);
-            $username=Input::get('r_email');
+            if (User::where('Email', '=', Input::get('r_email'))->exists())
+            {
+                $newpwd = Input::get('r_new_password');
+                $username=Input::get('r_email');
+                $pwd=Hash::make($newpwd);
 
-            $newpwd = Input::get('r_new_password');
-            $name='umamuruges2994@gmail.com';
-            $pwd=Hash::make($newpwd);
+                DB::table('user')
+                    ->where('Email', $username)
+                    ->update(['Password' => $pwd]);
+                $data = ['title' => 'Your Password has been changed!!use this password'];
+                Mail::send('Profile_Management.Content', $data, function ($m) {
 
-            DB::table('user')
-                ->where('Email', $username)
-                ->update(['Password' => $pwd]);
-            $data = ['title' => 'Your Password has been changed!!'];
-            Mail::send('Profile_Management.Content', $data, function ($m) {
+                    $userName=Input::get('r_email');
+                    $m->to($userName, 'Tester');
+                    $m->subject('Kido Learners!!');
+                });
 
-                $m->to('umamuruges2994@gmail.com', 'Tester');
-                $m->subject('Kido Learners!!');
-            });
+                //Alert::success('Successfully Registered');
 
+                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+            }
 
-            return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
-
+            else
+            {
+                return Redirect::to('RecoverPassword')->with('message3', 'User Name is invalid');
+            }
         }
-
-
     }
 
     public function uploadProfilePicture()
