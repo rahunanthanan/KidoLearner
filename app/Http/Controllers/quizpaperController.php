@@ -24,21 +24,65 @@ class quizpaperController extends Controller
 {
 
 
-    /***********get contact page view***********/
+
     public function viewquizp()
     {
 
 
-        $question = DB::table('exam', 'addquiz')
-            ->join('addquiz', 'addquiz.quizID', '=', 'exam.quizID')->get();
 
-             return view('quizpaper')
+
+        $inputt = Input::get('quiz');
+        $question = DB::table('addquiz', 'exam')
+
+            ->where('addquiz.quizID', '=', $inputt)
+            ->join('exam', 'addquiz.quizID', '=', 'exam.quizID')->get();
+
+        return view('quizpaper')
             ->with('quizpaper', exam::all())
             ->with('question', $question);
 
 
     }
 
+    public function attempt()
+    {
+
+
+        $inputt = Input::get('quiz');
+        $question = DB::table('addquiz')
+
+            ->where('quizID', '=', $inputt)->get();
+        return view('attemptquiz')
+            ->with('question', $question);
+
+
+
+    }
+
+
+    public function searchInventory()
+
+    {
+
+
+
+        $inputt = Input::get('quiz');
+        $input = Input::get('subject');
+        $results = DB::table('addquiz', 'quiz')
+
+
+            ->where('addquiz.quizID', '=', $inputt)
+            ->where('exam.subject', '=', $input)
+            ->join('quiz', 'addquiz.queID', '=', 'quiz.queID')
+            ->join('exam', 'addquiz.quizID', '=', 'exam.quizID')->get();
+
+
+        return View::make('attemptquiz')
+            ->with('results', $results);
+
+
+
+    }
 
 
 }

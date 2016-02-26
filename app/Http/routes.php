@@ -248,6 +248,25 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('addquiz','addquizController@addquiz');
 
 
+
+    Route::get('quizmain','quizmainController@getmain');
+    Route::get('addsubject','addsubjectController@getsubject');
+    Route::get('managesub','managesubController@getmanage');
+    Route::get('addquiz','addquizController@getquiz');
+    Route::post('addsubject','addsubjectController@addsubject');
+    Route::post('managesub','addsubjectController@editsubject');
+    Route::post('addquiz','addquizController@addquiz');
+
+    Route::get('quizpaper', 'quizpaperController@viewquizp');
+
+
+    Route::get('attemptquiz', 'quizpaperController@attempt');
+    Route::post('attemptquiz', 'quizpaperController@searchInventory');
+
+    Route::get('createquiz', 'createquizController@viewque');
+    Route::post('createquiz', 'createquizController@createquiz');
+
+
 //onchange function for excuse request form
     Route::get('/formc',function(){
         $category=Input::get('category');
@@ -256,11 +275,29 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::get('/ques',function(){
-        $id=Input::get('quID');
+        $id=Input::get('quesid');
         $sub=\App\quiz::where('queID','=',$id)->get();
 
         return Response::json($sub);
     });
+
+
+    Route::get('/quiz',function(){
+        $id=Input::get('quiz');
+        $sub=\App\exam::where('quizID','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
+
+    Route::get('/select',function(){
+        $id=Input::get('subject');
+        $sub=\App\exam::where('subject','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
+
 
 
     /* Kavi */
