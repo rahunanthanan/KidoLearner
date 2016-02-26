@@ -19,8 +19,11 @@ use Session;
 use Alert;
 use App\Providers\SweetAlertServiceProvider;
 use DB;
+use Validator;
 
 class SubcategoryController extends Controller{
+
+
 
 
     //  public function index(){
@@ -52,22 +55,45 @@ class SubcategoryController extends Controller{
 
         }*/
 
-    public function create(){
+    public function create($id){
 
-        return view('subCategory.create');
+        $cat=Category::find($id);
+
+        $subcat = DB::table('subcategories')
+            ->where('category_id', '=', $cat->id)
+            //e    ->select('name')
+            ->get();
+
+
+
+        return view('subCategory.create',compact('cat','subcat'));
 
     }
 
     public function store()
     {
+        $id=23;
+        //$catt=Input::get('catId');
 
-        $catt=23;
 
         $subcategory = new SubCategory();
         $subcategory->name = Input::get('name');
-        $subcategory->category_id=$catt;
+        $subcategory->category_id=$id;
 
         $subcategory->save();
+
+
+        return redirect('category');
+
+
+/*        $cat=Category::find($id);
+
+        $subcat = DB::table('subcategories')
+            ->where('category_id', '=', $cat->id)
+            //e    ->select('name')
+            ->get();
+
+        return view('subCategory.show',compact('cat','subcat'));
 
 
         /*        $categoryUpdate=Request::all();
@@ -76,27 +102,70 @@ class SubcategoryController extends Controller{
                 return redirect('category');*/
 
 
-        return view('subCategory.show');
+        //return view('subCategory.show');
     }
 
 
-    /*    public function edit($id)
+        public function edit($id)
         {
 
-            $category=Category::find($id);
+            $subcategory=Subcategory::find($id);
 
-            return view('category.edit',compact('category',$category));
+            return view('subCategory.edit',compact('subcategory',$subcategory));
 
-        }*/
+        }
 
-    /*    public function update($id){
+       public function update($id)
+       {
 
-            $categoryUpdate=Request::all();
-            $category=Category::find($id);
-            $category->update($categoryUpdate);
-            return redirect('category');
 
-        }*/
+           $rules = array(
+               'name' => 'Required'
+
+           );
+
+           $validation = Validator::make(Input::all(),$rules);
+
+           if( $validation->passes() )
+           {
+
+
+               $subcategoryUpdate = Request::all();
+               $subcategory = Subcategory::find($id);
+               $subcategory->update($subcategoryUpdate);
+
+               Alert::success('Successfully Updated');
+
+               return redirect('category');
+           }
+           else
+
+           {
+
+
+
+               $subcategory=Subcategory::find($id);
+
+               return view('subCategory.edit',compact('subcategory',$subcategory))->withErrors($validation);
+
+
+           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       }
 
     /*   public function destroy($id){
 

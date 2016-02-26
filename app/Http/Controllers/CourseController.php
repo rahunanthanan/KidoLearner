@@ -131,16 +131,62 @@ class CourseController extends Controller
 
     public function update($id){
 
-        $courseUpdate=Request::all();
+        // validation fields
+        $rules = array(
+            'name' => 'Required',
+            'category' => 'Required',
+            'description'=>'Required',
+            'filefield'=>'Required',
+            'date'=>'Required'
 
-        // $categoryname=Category::find($courses->category);
-        $course=Course::find($id);
-        $course->update($courseUpdate);
-        return redirect('courses');
+
+        );
+
+
+        $validation = Validator::make(Input::all(),$rules);
+
+        if( $validation->passes() ) {
+
+            $file = Request::file('filefield');
+
+
+            if ($file !== null)
+             {
+                 $extension = $file->getClientOriginalExtension();
+                 Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
+
+                 $destinationPath = 'Uploads/';
+                 $filename = $file->getClientOriginalName();
+                  Input::file('filefield')->move($destinationPath, $filename);
+              //  $course->img = $file->getClientOriginalName();
+
+             }
+
+            $course = new Course();
+            $course->name = Input::get('name');
+            $courseUpdate = Request::all();
+            $course = Course::find($id);
+
+            $course->update($courseUpdate);
+
+            Alert::success('Successfully Lesson Updated');
+
+            return redirect('courses');
+
+
+          }
+          else
+          {
+              $course=Course::find($id);
+              $categoryname=Category::all();
+              return view('courses.edit',compact('course','categoryname'))->withErrors($validation);
+
+           // return redirect('courses.edit{}')->withErrors($validation);
+          }
 
 
 
-    }
+        }
     public function destroy($id){
 
         Course::find($id)->delete();

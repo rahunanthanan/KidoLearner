@@ -40,6 +40,15 @@ class FileController extends Controller {
 
             return redirect('viewentry');
         }
+
+
+        else
+        {
+
+            Alert::error('Please Add File', 'Error')->persistent('Close');
+
+            return redirect('viewentry');
+        }
     }
 
     public function get($filename){

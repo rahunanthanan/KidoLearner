@@ -32,7 +32,7 @@
                 <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['category.destroy', $book->id]]) !!}
 
-                    <input type="hidden" value="{{ $cat->id }}" name="catid">
+                   {{-- <input type="hidden" value="{{ $cat->id }}" name="catid">--}}
 
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 

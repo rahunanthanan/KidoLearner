@@ -15,6 +15,7 @@ use Illuminate\Contracts\Database;
 use DB;
 use App\Quotation;
 use Illuminate\Html;
+use Alert;
 
 class FeedbackController extends Controller{
 
@@ -22,7 +23,7 @@ class FeedbackController extends Controller{
     public function show() {
 
 
-        return view('emails.feedbackView');
+        return view('emails.feedback');
     }
 
 
@@ -38,7 +39,7 @@ class FeedbackController extends Controller{
 
         $feed->save();
 
-        //Alert::message('Thanks for comment!')->persistent('Close');
+        Alert::message('Thanks for comment!')->persistent('Close');
 
         return view('emails.feedback');
     }
@@ -98,6 +99,7 @@ class FeedbackController extends Controller{
     public function destroy($id){
 
         Feedback::find($id)->delete();
+        Alert::success("Sucessfully Deleted");
         return redirect('emails');
 
     }

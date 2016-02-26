@@ -24,6 +24,9 @@
         {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
 
+    @if ($errors->has('name')) <p class="help-block" style="color:red">{{ $errors->first('name') }}</p> @endif
+
+
     <div class="form-group">
         <label for="">Group</label>
         <select class="form-control input-sm" name="category" id="category">
@@ -56,6 +59,10 @@
         {!! Form::textarea('description',null,['class'=>'form-control','size' => '5x5']) !!}
     </div>
 
+
+    @if ($errors->has('description')) <p class="help-block" style="color:red">{{ $errors->first('description') }}</p> @endif
+
+
     {!! Form::label('date', 'UploadDate:') !!}
     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy/mm/dd" >
         {!! Form::text('date',null,['class'=>'form-control']) !!}
@@ -73,6 +80,9 @@
         <input type="hidden" value="{{ csrf_token() }}" name="_token">
 
     </div>
+
+
+    @if ($errors->has('filefield')) <p class="help-block" style="color:red">{{ $errors->first('filefield') }}</p> @endif
 
 
 

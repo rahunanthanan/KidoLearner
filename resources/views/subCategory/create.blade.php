@@ -7,7 +7,10 @@
     {{--{!! Form::open(['url'=>'courses'],['files=>true'])!!}--}}
     <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('subCategory') }}"/>
 
-    {{--   <input type="hidden" name="catId" value="{{$catId}}">--}}
+  {{--  <form action="{{url('addentry', [])}}" method="post" enctype="multipart/form-data">--}}
+
+     {{-- <input type="hidden" name="catId" value="{{$cat}}">--}}
+
     <div class="form-group">
         {!! Form::label('name','Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}

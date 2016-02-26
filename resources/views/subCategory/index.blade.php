@@ -10,7 +10,7 @@
 
     {{--   <td><a href="{{url('subCategory/create')}}" class="btn btn-primary">Add Subject</a></td>--}}
 
-    <td><a href="{{route('subCategory.create',$cat->id)}}" class="btn btn-primary">Add Subject</a></td>
+    <td><a href="{{route('subCategory',$cat->id)}}" class="btn btn-primary">Add Subject</a></td>
 
     {{-- <td><a href="/subCategory/create/{{$cat->id}}" class="btn btn-primary">Add Subject</a></td>--}}
 

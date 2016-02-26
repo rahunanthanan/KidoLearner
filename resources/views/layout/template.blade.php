@@ -31,9 +31,7 @@
 <body >
 
 
-{{--    <script>
-        swal("Good job!", "You clicked the button!", "success")
-    </script>--}}
+
 
 
 <nav class="navbar navbar-default">
@@ -44,7 +42,9 @@
         <ul class="nav navbar-nav">
             <li><a href="/category">Create Group</a></li>
             <li><a href="/courses">Create Lesson</a></li>
-            <li><a href="/fileentries">Upload Course Materials</a></li>
+            <li><a href="/viewentry">Upload Course Materials</a></li>
+            <li><a href="/emails">View Feedback</a></li>
+            <li><a href="/emails/feedback">Send Feedback</a></li>
         </ul>
     </div>
 </nav>

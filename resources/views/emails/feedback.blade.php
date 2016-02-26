@@ -3,39 +3,9 @@
 
 @section('content')
 
-
-    <h1 align="center"> Feedback </h1>
-
-    {{--    {!! Form::open(['url'=>'contact_request'])!!}
+    <legend class="text-center header">Feed Back</legend>
 
 
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-
-        <div class="form-group">
-            {!! Form::label('first_name','First Name*')!!}
-            {!! Form::text('first_name',null,['class'=>'form-control'])!!}
-        </div>
-
-        <div class="form-group">
-            {!!Form::label ('email', 'E-mail Address*')!!}
-            {!!Form::email ('email',null,['class'=>'form-control']) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form:: textarea ('message', '', array('placeholder' => 'Message', 'class' => 'form-control', 'id' => 'message', 'rows' => '4' )) !!}
-        </div>
-
-
-
-        </div>--}}
-    {{--  @if(Session::has('message'))
-          <p class="alert"><font color="green">{{ Session::get('message') }}</font></p>
-      @endif--}}
-    @include('sweet::alert')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -43,7 +13,7 @@
 
                     <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('emails') }}"/>
                     <fieldset>
-                        <legend class="text-center header">Feed Back</legend>
+
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="glyphicon glyphicon-user bigicon"></i></span>

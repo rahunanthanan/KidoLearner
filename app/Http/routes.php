@@ -34,10 +34,15 @@ Route::group(['middleware' => ['web']], function () {
 
     // subcategory routes
 
-    Route::resource('subCategory', 'SubcategoryController');
+     Route::resource('subCategory','SubcategoryController');
 
 
-    Route::resource('emails', 'FeedbackController');
+    //feedback routes
+
+
+     Route::resource('emails', 'FeedbackController');
+
+     //Route:post('subCategory/create/{catId}','FeedbackController@destroy');
 
 
 
