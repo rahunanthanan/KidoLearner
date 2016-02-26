@@ -28,38 +28,42 @@
                 </div>
             </div>
 
-            <div class="control-label col-md-6">
-                <li><a href="{{ url('/RecoverPassword') }}">Forgot Password?</a></li>
-            </div>
+
 
             <div class="form-group">
 
-                <?php if(isset($errors)){ ?>
+                <div class="col-md-20">
+                    <?php if(isset($errors)){ ?>
+
                     @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <ul>
-                                @foreach ($errors->all() as $error)
 
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        <ul style='color:#ff0047;  list-style: none;  margin: 20px'  class="center-container">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+
                     @endif
-                <?php } ?>
 
-                <?php if(isset($status)){ ?>
+                    <?php } ?>
+
+                    <?php if(isset($status)){ ?>
+
                     <div class="alert alert-danger">
-
                         {{ $status }}
                     </div>
-                <?php } ?>
 
-                <div class="control-label col-md-6">
+                    <?php } ?>
+
                     <?php if(isset($message)){
-                        echo $message;}?>
+                        echo "<div style='color:#ff0047'>$message</div>";}?>
+
                 </div>
 
+            </div>
+
+            <div class="control-label col-md-6">
+                <li><a href="{{ url('/RecoverPassword') }}">Forgot Password?</a></li>
             </div>
 
             <div class="form-group">

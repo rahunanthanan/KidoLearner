@@ -113,42 +113,32 @@ class SettingsController extends Controller
 
         else
         {
-            //$id = Auth::user()->ID;
             session()->put('user','email');
-            $login_id=Input::get('login_id');
-            //$login_id=19;
-            if(Auth::loginUsingId($login_id))
+            $loginId=Input::get('login_id');
+            if(Auth::loginUsingId($loginId))
             {
-                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+                $newpwd = Input::get('new_password');
+                $name='umamuruges2994@gmail.com';
+                $pwd=Hash::make($newpwd);
 
-            }
-            /*//  $username=Auth::user()->UserName;
-             // DB::table('registration')
-             //     ->where('UserName',$username);
-             // $user= new User;
-            //$user = User::find(Auth::user()->UserName);
-              $username=Input::get('l_user_name');
-              $oldpwd = Input::get('old_password');
-              $newpwd = Input::get('new_password');
-             $name='umamuruges2994@gmail.com';
-              $pwd=Hash::make($newpwd);
+                DB::table('user')
+                    ->where('ID', $loginId)
+                    ->update(['Password' => $pwd]);
 
-              DB::table('user')
-                  ->where('UserName', $name)
-                  ->update(['Password' => $pwd]);
-              $data = ['title' => 'Your Password has been changed!!'];
-              Mail::send('Profile_Management.Content', $data, function ($m) {
+                $data = ['title' => 'Your Password has been changed!!'];
+              Mail::send('Profile_Management.Content', $data, function ($m)
+              {
+                  $loginID1=Input::get('login_id');
 
-                  $m->to('umamuruges2994@gmail.com', 'Tester');
+                  $email = DB::table('user')->where('ID', $loginID1)->value('Email');
+
+                  $m->to($email, 'Tester');
                   $m->subject('Kido Learners!!');
               });
 
-
-              return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');*/
-
+                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+            }
         }
-
-
     }
 
     public function recoverPassword()
