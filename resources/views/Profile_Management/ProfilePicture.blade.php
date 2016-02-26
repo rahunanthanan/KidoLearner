@@ -11,8 +11,6 @@
 </head>
 <body>
 
-
-
 <div class="container">
 
     <h1 class="text-muted text-center">
@@ -22,18 +20,12 @@
     <hr>
 
     <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('/ProfilePicture') }}">
-
+        <input type="hidden" name="login_id" value="19">
         <div class="form-group">
-
             <label class="control-label col-md-4" for="profile_picture">Choose:</label>
-
             <div class="control-label col-md-4">
-
                 <input type="file" name="filefield">
             </div>
-
-
-
         </div>
 
         @if (count($errors) > 0)
@@ -48,15 +40,13 @@
             </div>
         @endif
 
-
         <div class="form-group">
-
             <div class="col-md-offset-8 col-md-5">
-
                 <button type="submit" class="btn btn-lg btn btn-success" name="change" id="change" value="Change">Upload</button>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="button" class="btn btn-default" name="l_btnCancel" id="l_btnCancel">Cancel</button>
-
+{{--
+                <button type="button" class="btn btn-default" name="l_btnCancel" id="l_btnCancel"> <a href="/LoginUser">Cancel</a></button>
+--}}
             </div>
 
             @if (count($errors) < 0)
@@ -65,16 +55,11 @@
                 </div>
 
             @endif
-
         </div>
-
 
     </form>
 
-
 </div>
-
-
 
 </body>
 </html>

@@ -222,37 +222,34 @@ class SettingsController extends Controller
 
         else
         {
-            $file = Request::file('filefield');
-            $extension = $file->getClientOriginalExtension();
-            Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
+            session()->put('user','email');
+            $loginId=Input::get('login_id');
+            if(Auth::loginUsingId($loginId)) {
+
+                $file = Request::file('filefield');
+                $extension = $file->getClientOriginalExtension();
+                Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
+
+                $destinationPath = 'C:\wamp\www\KidoLearner\Uploads';
+                $filename = $file->getClientOriginalName();
+                Input::file('filefield')->move($destinationPath, $filename);
+
+                $file = Input::file('filefield');
+                $input = array('filefield' => $file);
+                $rules = array(
+                    'filefield' => 'image'
+                );
+
+                $name = 'umamuruges2994@gmail.com';
+
+                DB::table('user')
+                    ->where('ID', $loginId)
+                    ->update(['ProfilePicture' => $filename]);
 
 
-            $destinationPath = 'C:\wamp\www\KidoLearner\Uploads';
-            $filename = $file->getClientOriginalName();
-            Input::file('filefield')->move($destinationPath, $filename);
-
-            $file = Input::file('filefield');
-            $input = array('filefield' => $file);
-            $rules = array(
-                'filefield' => 'image'
-            );
-            // $user= new User;
-            //$user = User::find(Auth::user()->UserName);
-
-
-            $name='umamuruges2994@gmail.com';
-
-
-            DB::table('user')
-                ->where('email', $name)
-                ->update(['ProfilePicture' => $filename]);
-
-
-            return Redirect::to('Success3')->with('message3', 'SUCCESSFULLY CHANGED!!');
-
+                return Redirect::to('Success3')->with('message3', 'SUCCESSFULLY CHANGED!!');
+            }
         }
-
-
     }
 
 }
