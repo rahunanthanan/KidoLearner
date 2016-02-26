@@ -154,7 +154,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('MyProfile', 'UserController@getViewMyProfile');
 
     Route::get('ChangePassword', 'SettingsController@getViewChangePassword');
-    Route::post('ChangePassword', 'SettingsController@Change');
+    Route::post('ChangePassword', 'SettingsController@changePassword');
 
     Route::get('MyDetails', 'SettingsController@loadMyDetails');
     Route::post('Logout', 'UserController@getSignOut');

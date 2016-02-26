@@ -131,14 +131,10 @@ class UserController extends Controller
             $username=Input::get('l_user_name');
             $password=Input::get('l_password');
 
-            //if(Auth::attempt)
-
-
             if(Auth::attempt(['email' => $username, 'password' => $password]))
             {
                 $id = Auth::user()->ID;
                 session()->put('user',$id);
-                /*session()->put('registration',$username);*/
                 return view('Profile_Management.MyProfile');
             }
 

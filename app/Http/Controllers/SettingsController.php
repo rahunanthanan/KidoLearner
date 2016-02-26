@@ -86,10 +86,9 @@ class SettingsController extends Controller
         return view("Profile_Management.ViewChild", compact('reg1'));
     }
 
-    public function Change()
+    public function changePassword()
     {
         ini_set('xdebug.max_nesting_level', 200);
-
 
         $validator = Validator::make(
             [
