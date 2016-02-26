@@ -23,13 +23,13 @@ use DB;
 class SubcategoryController extends Controller{
 
 
-  //  public function index(){
+    //  public function index(){
 
-      /*  $subcategories=Subcategory::all();
-        return view('subCategory.index',compact('subcategories'));*/
-        //return view('subCategory.index');
+    /*  $subcategories=Subcategory::all();
+      return view('subCategory.index',compact('subcategories'));*/
+    //return view('subCategory.index');
 
-   // }
+    // }
 
     public function show($id){
 
@@ -46,11 +46,11 @@ class SubcategoryController extends Controller{
 
 
 
-/*    public function create($catId){
+    /*    public function create($catId){
 
-        return view('subCategory.create',compact('catId'));
+            return view('subCategory.create',compact('catId'));
 
-    }*/
+        }*/
 
     public function create(){
 
@@ -80,29 +80,29 @@ class SubcategoryController extends Controller{
     }
 
 
-/*    public function edit($id)
-    {
+    /*    public function edit($id)
+        {
 
-        $category=Category::find($id);
+            $category=Category::find($id);
 
-        return view('category.edit',compact('category',$category));
+            return view('category.edit',compact('category',$category));
 
-    }*/
+        }*/
 
-/*    public function update($id){
+    /*    public function update($id){
 
-        $categoryUpdate=Request::all();
-        $category=Category::find($id);
-        $category->update($categoryUpdate);
-        return redirect('category');
+            $categoryUpdate=Request::all();
+            $category=Category::find($id);
+            $category->update($categoryUpdate);
+            return redirect('category');
 
-    }*/
+        }*/
 
- /*   public function destroy($id){
+    /*   public function destroy($id){
 
-        Category::find($id)->delete();
-        return redirect('category');
+           Category::find($id)->delete();
+           return redirect('category');
 
-    }*/
+       }*/
 
 }

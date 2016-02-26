@@ -25,14 +25,14 @@
                 <td>{{ $book->comment}}</td>
 
 
-               {{--<td><a href="{{url('courses',$book->id)}}" class="btn btn-primary">Read</a></td>--}}
+                {{--<td><a href="{{url('courses',$book->id)}}" class="btn btn-primary">Read</a></td>--}}
 
                 {!! Form::open(['method' => 'DELETE', 'route'=>['emails.destroy', $book->id]]) !!}
 
 
 
-                   <td> {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}</td>
-                    {!! Form::close() !!}
+                <td> {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}</td>
+                {!! Form::close() !!}
 
 
             </tr>

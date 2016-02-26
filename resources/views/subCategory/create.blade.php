@@ -7,7 +7,7 @@
     {{--{!! Form::open(['url'=>'courses'],['files=>true'])!!}--}}
     <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('subCategory') }}"/>
 
- {{--   <input type="hidden" name="catId" value="{{$catId}}">--}}
+    {{--   <input type="hidden" name="catId" value="{{$catId}}">--}}
     <div class="form-group">
         {!! Form::label('name','Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}

@@ -26,40 +26,40 @@ use Redirect;
 class CourseController extends Controller
 {
 
-  public function index(){
+    public function index(){
 
 
-      //$course=Course::find($id);
+        //$course=Course::find($id);
 
 
-      $courses=Course::all();
-      $categoryname=Category::all();
+        $courses=Course::all();
+        $categoryname=Category::all();
 
-      return view('courses.index',compact('courses','categoryname'));
+        return view('courses.index',compact('courses','categoryname'));
 
-  }
+    }
 
-  public function show($id){
+    public function show($id){
 
 
         $courses=Course::find($id);
         $categoryname=Category::find($courses->category);
         return view('showCourses.show',compact('courses','categoryname'));
 
-      //return view('showCourses.show',compact('courses'))->with('categories',$categories);
+        //return view('showCourses.show',compact('courses'))->with('categories',$categories);
 
 
-  }
+    }
 
-  public function create(){
+    public function create(){
 
-      $categories=Category::all();
-      //$categoryname=Category::find($courses->category);
-      return view('courses.create')->with('categories',$categories);
+        $categories=Category::all();
+        //$categoryname=Category::find($courses->category);
+        return view('courses.create')->with('categories',$categories);
 
-  }
+    }
 
-  public function store()
+    public function store()
     {
 
         // validation fields
@@ -120,31 +120,31 @@ class CourseController extends Controller
 
     }
 
-  public function edit($id)
-  {
+    public function edit($id)
+    {
 
-      $course=Course::find($id);
-      $categoryname=Category::all();
-      return view('courses.edit',compact('course','categoryname'));
+        $course=Course::find($id);
+        $categoryname=Category::all();
+        return view('courses.edit',compact('course','categoryname'));
 
-  }
+    }
 
-  public function update($id){
+    public function update($id){
 
-    $courseUpdate=Request::all();
+        $courseUpdate=Request::all();
 
-     // $categoryname=Category::find($courses->category);
-    $course=Course::find($id);
-    $course->update($courseUpdate);
-    return redirect('courses');
+        // $categoryname=Category::find($courses->category);
+        $course=Course::find($id);
+        $course->update($courseUpdate);
+        return redirect('courses');
 
 
 
-  }
-   public function destroy($id){
+    }
+    public function destroy($id){
 
-     Course::find($id)->delete();
-     return redirect('courses');
+        Course::find($id)->delete();
+        return redirect('courses');
 
     }
 

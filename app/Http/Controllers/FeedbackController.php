@@ -23,7 +23,7 @@ class FeedbackController extends Controller{
 
 
         return view('emails.feedbackView');
- }
+    }
 
 
     public function store()
@@ -43,46 +43,46 @@ class FeedbackController extends Controller{
         return view('emails.feedback');
     }
 
-/*    public function getFeedform(){
+    /*    public function getFeedform(){
 
-        $data=Input::all();
+            $data=Input::all();
 
-        $rules=array(
+            $rules=array(
 
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
-            'phone_number'=>'numeric|min:10',
-            'email' => 'required|email',
-            'message' => 'required|min:25'
+                'first_name' => 'required|alpha',
+                'last_name' => 'required|alpha',
+                'phone_number'=>'numeric|min:10',
+                'email' => 'required|email',
+                'message' => 'required|min:25'
 
-     );
+         );
 
-        $validator=Validator::make($data,$rules);
+            $validator=Validator::make($data,$rules);
 
-        if($validator->passes()){*/
-
-
+            if($validator->passes()){*/
 
 
 
-/*            Mail::send('emails.hello',$data,function($message) use($data){
-
-                $message->from($data['email'],$data['first_name']);
-
-                $message->to('rcholan11@gmail.com','Jeyamaal')->cc('rcholan11@gmail.com')->subject('Feedback');
-
-            });*/
-
-/*            return View::make('emails.hello');
-
-        }
-        else{
-
-            return Redirect::to('emails.hello')->withErrors($validator);
-        }
 
 
- }*/
+    /*            Mail::send('emails.hello',$data,function($message) use($data){
+
+                    $message->from($data['email'],$data['first_name']);
+
+                    $message->to('rcholan11@gmail.com','Jeyamaal')->cc('rcholan11@gmail.com')->subject('Feedback');
+
+                });*/
+
+    /*            return View::make('emails.hello');
+
+            }
+            else{
+
+                return Redirect::to('emails.hello')->withErrors($validator);
+            }
+
+
+     }*/
 
     public function index(){
 

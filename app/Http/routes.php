@@ -9,16 +9,30 @@ use App\Fileentry;
 Route::group(['middleware' => ['web']], function () {
 
 
-//Route::get('about','PagesController');
+    /*----Jeyamaal Routes ----------*/
 
+    //Route::get('about','PagesController');
     Route::get('/', 'WelcomeController@index');
 
     Route::get('subCategory/create/{catId}', 'subCategoryController@create');
 
 
+
+
+    // course routes
+
     Route::resource('courses', 'CourseController');
 
+
+
+    // category routes
+
     Route::resource('category', 'CategoryController');
+
+
+
+
+    // subcategory routes
 
     Route::resource('subCategory', 'SubcategoryController');
 
@@ -28,26 +42,34 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
-    Route::post('add','FileEntryController@add');
 
     Route::get('/emails/feedback', 'ContactController@getContactForm');
 
     Route::post('contact_request', 'ContactController@getContactUsForm');
 
 
-
-    Route::get('addentry','FileController@index');
-
-    Route::get('receive','FileController@get');
+    //file upload routes
 
 
-     Route::get('getentry/{filename}','FileController@get');
+    Route::get('viewentry','FileController@index');
+
+    Route::post('addentry','FileController@add');
+
+    Route::get('fileentry/get/{filename}','FileController@get');
+
+    /*Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileController@get']);*/
+
+
+
+    /*    Route::get('receive','FileController@get');
+
+        Route::get('getentry/{filename}','FileController@get');*/
 
 
 
     Route::get('/ajax-subcat',function(){
 
-       $cat_id = Input::get('cat_id');
+        $cat_id = Input::get('cat_id');
 
         $subcategories= Subcategory::where('category_id', '=' ,$cat_id)->get();
 
@@ -55,7 +77,6 @@ Route::group(['middleware' => ['web']], function () {
 
 
     });
-
   //  Route::get('fileentry', 'FileEntryController@index');
 
   //  Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileEntryController@get']);
@@ -110,6 +131,13 @@ Route::group(['middleware' => ['web']], function () {
         $jobs->save();
         return Redirect::route('home');
     });*/
+
+
+
+
+
+    /*----Umatharsini Routes ----------*/
+
 
 
     Route::get('Success', 'SignUpController@success');
@@ -233,7 +261,7 @@ Route::group(['middleware' => ['web']], function () {
     /* Kavi */
 
     Route::get('bookupload', 'bookuploadController@viewupload');
-    Route::get('category', 'bookuploadController@viewcategory');
+    Route::get('librarycategory', 'bookuploadController@viewcategory');
     Route::get('viewcategory', 'bookuploadController@viewallcat');
     Route::get('viewcountcat', 'bookuploadController@viewcountcat');
     Route::get('LibraryUpload', 'bookuploadController@uploadmaterials');

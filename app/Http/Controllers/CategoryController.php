@@ -107,7 +107,7 @@ class CategoryController extends Controller{
 
         }else{
 
-          //  Session::flash('flash_category_empty',''); //<--FLASH MESSAGE
+            //  Session::flash('flash_category_empty',''); //<--FLASH MESSAGE
 
             return redirect('category');
         }
@@ -123,13 +123,13 @@ class CategoryController extends Controller{
 
         Session::flash('flash_category_delete','');
 
-      //  $result=Input::get('onsubmit');
+        //  $result=Input::get('onsubmit');
 
         //if( $result == 'true') {
 
-            Category::find($id)->delete();
-            return redirect('category');
-       // }
+        Category::find($id)->delete();
+        return redirect('category');
+        // }
     }
 
 }

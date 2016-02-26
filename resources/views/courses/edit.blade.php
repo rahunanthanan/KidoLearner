@@ -24,7 +24,7 @@
         {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
 
-   <div class="form-group">
+    <div class="form-group">
         <label for="">Group</label>
         <select class="form-control input-sm" name="category" id="category">
 

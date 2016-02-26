@@ -50,7 +50,7 @@
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">
-           {{-- <th>Id</th>--}}
+            {{-- <th>Id</th>--}}
             <th>Name</th>
             {{--<th>Category</th>--}}
             <th>Description</th>

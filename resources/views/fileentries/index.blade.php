@@ -33,29 +33,29 @@
     <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 
 
-   {{-- <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('addentry') }}"/>--}}
-{{--    <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('getentry') }}"/>--}}
-{{--
-    <input type="file" name="filefield">
-    <input type="submit">
+    {{-- <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('addentry') }}"/>--}}
+    {{--    <form class="form-vertical" enctype="multipart/form-data" method="post" action="{{ url('getentry') }}"/>--}}
+    {{--
+        <input type="file" name="filefield">
+        <input type="submit">
 
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    </form>
+        </form>
 
-    <h1> Pictures list</h1>
+        <h1> Pictures list</h1>
 
-    <div class="row">
+        <div class="row">
 
-        <ul>
-            @foreach($entries as $entry)
-                <li>{{$entry->original_filename}}</li>
-            @endforeach
-        </ul>
-    </div>
+            <ul>
+                @foreach($entries as $entry)
+                    <li>{{$entry->original_filename}}</li>
+                @endforeach
+            </ul>
+        </div>
 
-@endsection
---}}
+    @endsection
+    --}}
 
 
 
