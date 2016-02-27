@@ -74,7 +74,8 @@
                                           <a href="/viewcategory" class="list-group-item"><span class="glyphicon glyphicon-eye-open"></span>View Category<span class="badge"></span></a>
                                                <a href="/librarytype" class="list-group-item"><span class="glyphicon glyphicon-eye-open"></span>View Type<span class="badge"></span></a>
                                           <a href="/LibraryUpload" class="list-group-item"><span class="glyphicon glyphicon-upload"></span>Upload Materials<span class="badge"></span></a>
-                                          <a href="/viewmaterials" class="list-group-item"><span class="glyphicon glyphicon-eye-open"></span>View Materials<span class="badge"></span></a>
+                                           <a href="/viewmaterials" class="list-group-item"><span class="glyphicon glyphicon-eye-open"></span>View Materials<span class="badge"></span></a>
+                                           <a href="/booksearch" class="list-group-item"><span class="glyphicon glyphicon-download"></span>Download Materials<span class="badge"></span></a>
 
 
                                 </div>

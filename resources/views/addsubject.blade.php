@@ -12,7 +12,7 @@
                       <div style="padding-top:30px" class="panel-body" >
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                          <h3 align="center"><strong><font color="black">Add Duration</font></strong></h3>
+                          <h3 align="center"><strong><font color="black">Add Subject</font></strong></h3>
 
 
                           <br><hr style="height:1px;border:none;color:deepskyblue;background-color:deepskyblue;" /><br>
@@ -40,11 +40,13 @@
 
                          <div class="col-md-8">
 
-                   {{--form form blog entry--}}
+                  
                            {!! Form::open(array('url'=>'addsubject','method'=>'POST', 'files'=>true)) !!}
 
 
-                           <div class="form-group">
+
+
+                                 <div class="form-group">
                                     <label for="">Category</label>
                                      <br/>
                                     <select class="form=control input-sm" name="category" id="category" style="width: 250px">
@@ -58,62 +60,21 @@
                                     @if ($errors->has('category')) <p class="help-block"><font color="red">{{ $errors->first('category') }}</font></p> @endif
                                  </div>
 
-
-
-                          <div class="form-group">
-                             <label for="">Subject</label>
-                             <br/>
-                            <select class="form=control input-sm" name="subject" id="subject" style="width: 250px">
-                                <option>Easy Maths</option>
-                                <option>Biology</option>
-                                <option>English</option>
-
-
-                                {{--<option  style="width: auto" id="subject" name="subject"></option>--}}
-                            </select>
-                             @if ($errors->has('subject')) <p class="help-block"><font color="red">{{ $errors->first('subject') }}</font></p> @endif
-                         </div>
-
-                             <script>
+                                <div class="form-group">
+                                    <label for="">Subject</label>
+                                     <br/>
+                                    <input type="text"  name="subject" class="form-control"  id="subject" style="width: 250px" >
+                                    @if ($errors->has('subject')) <p class="help-block"><font color="red">{{ $errors->first('subject') }}</font></p> @endif
+                                 </div>
 
 
 
+                          
+
+                             
 
 
-                                                                                       $('#category').on('change',function(e){
-                                                                                       console.log(e);
-
-                                                                                       var po=e.target.value;
-                                                                                       console.log(po);
-                                                                                       $.get('/formc?category='+po,function(data){
-
-
-
-
-                                                              $.each(data,function(index, zoneObj){
-                                                              $('#subject').append('<option value="'+zoneObj.id+'">'+zoneObj.subject+'</option>');
-
-                                                              });
-
-                                                              });
-                                                             });
-
-
-
-                                                 </script>
-
-
-                                        <div class="form-group">
-                                             <label>Duration:</label>
-                                             <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-time"></span>
-                                                 </div>
-                                                 <input type="text" class="form-control"name="duration" style="width: 200px">&nbsp;&nbsp;&nbsp;<label style="color: green">MINS</label>
-
-                                               </div><!-- /.input group -->
-                                               @if ($errors->has('duration')) <p class="help-block"><font color="red">{{ $errors->first('duration') }}</font></p> @endif
-                                         </div>
+                                        
 
                                         <button type="submit" name="btn" value="Submit" class="btn btn-success">Submit</button>
 

@@ -55,10 +55,10 @@
                                                                               <th class="col-sm-2">Category</th>
                                                                               <th class="col-sm-2">SubjectID</th>
                                                                               <th class="col-sm-2">Subject</th>
-                                                                              <th class="col-sm-2">Duration</th>
-                                                                              <th class="col-sm-2">Action</th>
-                                                                              <th class="col-sm-2">Action</th>
-                                                                              <th class="col-sm-2">Action</th>
+                                                                              
+                                                                              <th class="col-sm-2">Manage</th>
+                                                                              <th class="col-sm-2">Edit</th>
+                                                                              <th class="col-sm-2">Delete</th>
 
 
 
@@ -75,80 +75,124 @@
                                                                                   <td class="col-sm-2">{{$sub->category}}</td>
                                                                                   <td class="col-sm-2">{{$sub->subID}}</td>
                                                                                   <td class="col-sm-2">{{$sub->subject}}</td>
-                                                                                  <td class="col-sm-2">{{$sub->duration}}</td>
-                                                                                  <td class="col-sm-2"><a href="/addquiz">Manage questions</a></td>
-                                                                                  <td class="col-sm-2"><button id="Edit" class="btn btn-warning" type="button" name="btn" data-toggle="modal" data-target="#{{$sub->subID}}" class="btn btn-info">Edit</button></td>
-                                                                                  <td class="col-sm-2"><button id="Delete" class="btn btn-danger" type="button" name="btn" data-toggle="modal" data-target="#viewTable3" class="btn btn-danger">Delete</button></td>
+                                                                                  <td class="col-sm-2"> <a href=/addquiz>Manage Subject</a></td>
+                                                                                  
+                                                                                  <td class="col-sm-2">
 
+                              <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#{{$sub->subID}}">Edit</a></td>
+                                 <div id="{{$sub->subID}}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog"  style="width: 40%">
 
-                                                          {!! Form::open(array('url'=>'managesub')) !!}
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
 
-                                                                 <div id="{{$sub->subID}}" class="modal fade" role="dialog">
-                                                                        <div class="modal-dialog"  style="width:40%">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel"><strong><font color="red"> Subject Details</font></strong></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <fieldset >
+                               
+                                                  
 
-                                                                      <!-- Modal content-->
-                                                                         <div class="modal-content">
-                                                                          <div class="modal-header">
-                                                                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                                                          <h4 class="modal-title custom_align" id="Heading"><strong><font color="green">Edit Subject</font></strong></h4>
+                                                                  {!! Form::open(array('url'=>'managesub')) !!}
 
-                                                                          </div>
+                                                                   <div class="col-md-6">
+                                                                      <div class="form-group">
+                                                                          <label for="disabledTextInput" class="col-sm-4 control-label">SubjectID</label>
+                                                                          <div class="col-sm-6">
+                                                                              <input type="text" readonly=""  name="subID" id="TextInput" style="width: 250px" class="form-control" value={{$sub->subID}}>
+                                                                          </div> <br><br>
+                                                                      </div>
 
-                                                                         <div class="modal-body">
-                                                                           <fieldset>
+                                                                      <div class="form-group">
+                                                                          <label for="disabledTextInput" class="col-sm-4 control-label">Category</label>
+                                                                          <div class="col-sm-6">
+                                                                              <input type="text"  name="category" id="TextInput" style="width: 250px" class="form-control" value={{$sub->category}}>
+                                                                              @if ($errors->has('category')) <p class="help-block"><font color="red">{{ $errors->first('category') }}</font></p> @endif
+                                                                          </div><br><br>
+                                                                      </div>
 
-                                                                           <div class="form-group">
-                                                                            <label for="disabledTextInput" class="col-sm-4 control-label">ID</label>
-                                                                            <div class="col-sm-6">
-                                                                              <input type="text"  name="id" id="TextInput" class="form-control" value={{$sub->subID}}>
+                                                                      <div class="form-group">
+                                                                          <label for="disabledTextInput" class="col-sm-4 control-label">Subject</label>
+                                                                          <div class="col-sm-6">
+                                                                              <input type="text"  name="subject"class="form-control" style="width: 250px"  value={{$sub->subject}}>
+                                                                              @if ($errors->has('subject')) <p class="help-block"><font color="red">{{ $errors->first('subject') }}</font></p> @endif
+                                                                          </div><br><br>
+                                                                      </div>
 
-                                                                            </div> <br><br>
-                                                                          </div>
+                                                                      
 
-                                                                           <div class="form-group">
-                                                                             <label for="disabledTextInput" class="col-sm-4 control-label">Category</label>
-                                                                            <div class="col-sm-6">
-                                                                             <input type="text"  name="category" id="TextInput" class="form-control" value={{$sub->category}}>
-                                                                             @if ($errors->has('category')) <p class="help-block"><font color="red">{{ $errors->first('category') }}</font></p> @endif
-                                                                             </div>
-                                                                           </div>
-
-                                                                           <br><br><br>
-
-                                                                            <div class="form-group">
-                                                                            <label for="disabledTextInput" class="col-sm-4 control-label">Subject</label>
-                                                                             <div class="col-sm-6">
-                                                                              <input type="text"  name="subject" id="TextInput" class="form-control" value={{$sub->subject}}>
-                                                                               @if ($errors->has('subject')) <p class="help-block"><font color="red">{{ $errors->first('subject') }}</font></p> @endif
-                                                                           </div>
-                                                                         </div>
-
-                                                                         <br><br>
-
-                                                                            <div class="form-group">
-                                                                              <label for="disabledTextInput" class="col-sm-4 control-label">Duration</label>
-                                                                              <div class="col-sm-6">
-                                                                               <input type="text"  name="duration" class="form-control"  id="duration" value={{$sub->duration}}>
-                                                                               @if ($errors->has('duration')) <p class="help-block"><font color="red">{{ $errors->first('duration') }}</font></p> @endif
-                                                                              </div><br><br>
-                                                                             </div>
+                                                                     
 
 
 
-                                                                          </fieldset>
-                                                                            </div>
-                                                                             <div class="modal-footer">
-                                                                               <input class="btn btn-success" value="Submit" type="submit">
-                                                                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                            </div>
-                                                                           </div>
 
-                                                                    {!!  Form::close() !!}
+
+                                                         </fieldset>
 
                                                               </div>
+                                                              <div class="modal-footer">
+                                                                   <input class="btn btn-success" name="btn" value="Submit" type="submit">
+                                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+
+                                                        {!!  Form::close() !!}
 
 
+
+                                                  </div>
+
+                                              
+
+
+                                              <td align="center">
+                                                  <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$sub->subID}}">Delete</a>
+
+                                                  <div id="delete{{$sub->subID}}" class="modal fade" role="dialog">
+                                                      <div class="modal-dialog"  style="width: 40%" >
+
+                                                          <!-- Modal content-->
+                                                          <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                                                  <h4 class="modal-title custom_align" id="Heading"><strong><font color="red">Delete Subject Details</font></strong></h4>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                  <fieldset>
+
+
+                                                                     {!! Form::open(array('url'=>'managesub')) !!}
+                                                                      <div class="form-group">
+                                                                          <label class="col-sm-4 control-label">SubjectID</label>
+                                                                          <div class="col-sm-6">
+                                                                              <input type="text" readonly name="subID" id="TextInput" class="form-control" value={{$sub->subID}}>
+                                                                          </div><br><br>
+                                                                      </div>
+
+
+                                                                      
+                                                                   <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                   <input class="btn btn-danger" name="btn" value="Delete" type="submit">
+                                                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                 </div>
+
+                                                                        {!!  Form::close() !!}
+
+
+                                                                  </fieldset>
+                                                              </div>
+
+                                                          </div>
+
+                                                      </div>
+
+
+
+                                              </td>
                                                           </tr>
 
                                                     @endforeach

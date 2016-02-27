@@ -149,11 +149,22 @@
 
                                     <div class="form-group">
                                          <label>Category:</label>
+
                                          <div class="input-group">
+
                                           <div class="input-group-addon">
                                               <span class="glyphicon glyphicon-pencil"></span>
                                           </div>
-                                           <input type="text" class="form-control" name="category">
+
+                                             <select class="form-control" name="category" id="category">
+                                                 @foreach($categorys as $cat)
+                                                     <option></option>
+                                                     <option value="{{$cat->id}}" style="width: auto" id="category" name="category">{{$cat->category}}</option>
+
+                                                 @endforeach
+                                             </select>
+
+                                           {{--<input type="text" class="form-control" name="category">--}}
                                           </div><!-- /.input group -->
                                          @if ($errors->has('category')) <p class="help-block"><font color="red">{{ $errors->first('category') }}</font></p> @endif
                                        </div>
@@ -164,10 +175,39 @@
                                        <div class="form-group">
                                              <label>Type:</label>
                                            <div class="input-group">
+
                                               <div class="input-group-addon">
                                                   <span class="glyphicon glyphicon-save"></span>
                                                </div>
-                                               <input type="text" class="form-control"  name="type">
+                                                   <select class="form-control" name="type1" id="type1" style="width: 250px">
+                                                       <option  style="width: auto" id="type1"></option>
+                                                   </select>
+
+                                               <script>
+
+                                                   $('#category').on('change',function(e){
+                                                       console.log(e);
+
+                                                       var po=e.target.value;
+                                                       console.log(po);
+                                                       $.get('/type1?category='+po,function(data){
+
+
+                                                           $.each(data,function(index, zoneObj){
+                                                               $('#type1').append('<option value="'+zoneObj.typeName+'">'+zoneObj.typeName+'</option>');
+
+
+
+
+                                                           });
+
+                                                       });
+
+                                                   });
+
+                                               </script>
+
+                                               {{--<input type="text" class="form-control"  name="type">--}}
 
                                              </div><!-- /.input group -->
                                              @if ($errors->has('type')) <p class="help-block"><font color="red">{{ $errors->first('type') }}</font></p> @endif

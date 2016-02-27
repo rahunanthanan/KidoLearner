@@ -34,50 +34,71 @@
                         @endif
 
 
-                      @foreach($subjects as $sub)
+                      
 
                      {!! Form::open(array('url'=>'addquiz')) !!}
 
 
                                        <div class="form-group">
-                                          <label>Category:</label>
-                                          <div class="input-group">
-                                            <div class="input-group-addon">
-                                              <span class="glyphicon glyphicon-user"></span>
-                                            </div>
-                                            <input type="text"  class="form-control"  name="category" value={{$sub->category}}>
+                                    <label for="">Category</label>
+                                     <br/>
+                                    <select class="form=control input-sm" name="category" id="category" style="width: 250px">
 
-                                          </div><!-- /.input group -->
+                                     @foreach($subjects as $sub)
+                                     <option></option>
+                                      <option value="{{$sub->category}}" style="width: auto" name="category" id="category">{{$sub->category}}</option>
 
-                                        </div>
+                                     @endforeach
+                                    </select>
+                                    
+                                 </div>
 
+                                <div class="form-group">
+                                    <label for="">Subject</label>
+                                     <br/>
+                                     <select class="form=control input-sm" name="subject" id="subject" style="width: 250px">
 
-                                       <div class="form-group">
-                                         <label>Subject:</label>
-                                         <div class="input-group">
-                                           <div class="input-group-addon">
-                                             <span class="glyphicon glyphicon-pencil"></span>
-                                           </div>
-                                           <input type="text"  class="form-control"  name="subject" value={{$sub->subject}}>
+                                     <option  style="width: auto"name="subject" id="subject"></option>
+                                     <option>computer</option>
 
-                                         </div><!-- /.input group -->
-
-                                       </div>
-
-
+                                     </select>
+                                 </div>
 
 
-                                      <div class="form-group">
-                                         <label>Duration:</label>
-                                         <div class="input-group">
-                                           <div class="input-group-addon">
-                                             <span class="glyphicon glyphicon-home"></span>
-                                           </div>
-                                           <input type="text"  class="form-control" name="duration" value={{$sub->duration}}>
 
-                                         </div><!-- /.input group -->
+                          
 
-                                       </div>
+                             <script>
+
+
+
+
+
+                                                                                       $('#category').on('change',function(e){
+                                                                                       console.log(e);
+
+                                                                                       var po=e.target.value;
+                                                                                       console.log(po);
+                                                                                       $.get('/formc?category='+po,function(data){
+
+
+
+
+                                                              $.each(data,function(index, zoneObj){
+                                                              $('#subject').append('<option value="'+zoneObj.subID+'">'+zoneObj.subID+'</option>');
+
+                                                              });
+
+                                                              });
+                                                             });
+
+
+
+                                                 </script>
+
+
+
+                                      
 
                                     <button onlick="#" class="btn btn-info"><a href=/managesub>BACK PREVIOUS</a></button>&nbsp;&nbsp;
                                     <button id="ADD" class="btn btn-warning" type="button" name="btn" data-toggle="modal" data-target="#viewTable5" class="btn btn-info">ADD QUESTION</button>
@@ -181,7 +202,7 @@
 
 
 
-                        @endforeach
+                       
 
                          {!!  Form::close() !!}
                       </div>
@@ -194,7 +215,7 @@
 
                     <button id="id" class="btn btn-success" type="button" name="btn" data-toggle="modal" data-target="#{{$quiz->queID}}" value="" class="btn btn-info">QUESTION {{$quiz->queID}} ADDED</button>
 
-                                     {!! Form::open(array('url'=>'addquiz')) !!}
+                                            {!! Form::open(array('url'=>'addquiz')) !!}
 
 
                                                                    <div id="{{$quiz->queID}}" class="modal fade" role="dialog">

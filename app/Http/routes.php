@@ -82,6 +82,8 @@ Route::group(['middleware' => ['web']], function () {
 
 
     });
+
+
   //  Route::get('fileentry', 'FileEntryController@index');
 
   //  Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileEntryController@get']);
@@ -300,6 +302,21 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+    Route::get('/type1',function(){
+        $id=DB::table('category')
+            ->where('category',Input::get('category'))
+            ->value('id')->get();
+        $sub=\App\librarytype::where('catID','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
+
+
+
+
+
+
     /* Kavi */
 
     Route::get('bookupload', 'bookuploadController@viewupload');
@@ -318,5 +335,11 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('createquiz', 'createquizController@viewque');
     Route::post('createquiz', 'createquizController@createquiz');
+
+    Route::post('booksearch','booksearchController@searchInventory');
+
+
+    Route::get('booksearch/get/{filename}', array( 'as' => 'getentry', 'uses' => 'booksearchController@get' ));
+    Route::get('booksearch', 'booksearchController@show');
     //
 });

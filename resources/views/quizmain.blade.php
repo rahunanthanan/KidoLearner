@@ -37,22 +37,14 @@
 
 {{--firt black label--}}
 <div class="row">
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-             <ul class="nav navbar-nav navbar-right">
-                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li>
-                    <a>
-                    <?php
-                    $dt = new DateTime();
-                    echo $dt->format('Y-m-d ');
-                    ?>
-                    </a>
-                    </li>
-              </ul>
-        </div>
-    </nav>
+    <div class="col-md-12">
+
+        <h3 class="text-muted text-center">
+            Children Web Learning Application
+        </h3>
+
+
+    </div>
 </div>
 
 {{--ministry logo--}}
@@ -61,14 +53,14 @@
     <div class="col-md-7">
 
     </div>
-    <div class="col-md-4">
+    {{--<div class="col-md-4">
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
-    </div>
+    </div>--}}
 </div>
 
 
