@@ -36,32 +36,23 @@ class bookuploadController extends Controller
     public function viewallcat()
     {
 
+        $count = DB::table('librarytype', 'category')
+
+            ->select(array('category.category', DB::raw('COUNT(librarytype.typename) as Count')))
+            ->join('category', 'librarytype.catID', '=', 'category.id','right outer')
+
+            ->groupby('librarytype.catID')
+
+            ->get();
+
         return View::make('viewcategory')
-            ->with('categorys', librarycategory::all());
+
+            ->with('count', $count);
 
 
     }
 
-    /**
-     * @return mixed
-     */
-    public function viewcountcat()
-    {
 
-//        $out = DB::table('librarytype')
-//            ->select(array(DB::raw('COUNT(typeID)')))
-//            ->group_by('catID');
-
-        return View::make('viewcategory')
-            ->with('catcount', DB::table('librarytype')
-            ->select(array(DB::raw('COUNT(typeID) as cont')))
-            ->group_by('catID'));
-//            DB::table('librarytype')
-//            ->select(array(DB::raw('COUNT(typeID)')))
-//            ->group_by('catID');
-
-
-    }
 
     public function uploadmaterials()
     {
@@ -80,8 +71,11 @@ class bookuploadController extends Controller
 
     public function viewtype()
     {
+        $type=DB::table('librarytype', 'category')
+            ->join('category', 'librarytype.catID', '=', 'category.id')
+            ->get();
         return View::make('librarytype')
-            ->with('types', librarytype::all());
+            ->with('types', $type);
 
     }
 

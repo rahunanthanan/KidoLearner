@@ -32,9 +32,8 @@
                              <thead>
                                           <tr>
 
+                                                          <th class="col-sm-2">Type</th>
                                                           <th class="col-sm-2">Category</th>
-                                                          <th class="col-sm-2">TypeID</th>
-                                                           <th class="col-sm-2">Type</th>
 
 
 
@@ -50,9 +49,8 @@
 
                                               @foreach($types as $type)
 
-                                                          <td class="col-sm-2">{{$type->CatID}}</td>
-                                                          <td class="col-sm-2">{{$type->typeID}}</td>
                                                           <td class="col-sm-2">{{$type->typeName}}</td>
+                                                          <td class="col-sm-2">{{$type->category}}</td>
 
 
 
