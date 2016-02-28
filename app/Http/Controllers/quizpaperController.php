@@ -24,27 +24,27 @@ class quizpaperController extends Controller
 {
 
 
-
+    
     public function viewquizp()
     {
 
 
-
-
+       
+       
         $inputt = Input::get('quiz');
         $question = DB::table('addquiz', 'exam')
 
             ->where('addquiz.quizID', '=', $inputt)
             ->join('exam', 'addquiz.quizID', '=', 'exam.quizID')->get();
 
-        return view('quizpaper')
+             return view('quizpaper')
             ->with('quizpaper', exam::all())
             ->with('question', $question);
 
 
     }
 
-    public function attempt()
+   public function attempt()
     {
 
 
@@ -52,37 +52,37 @@ class quizpaperController extends Controller
         $question = DB::table('addquiz')
 
             ->where('quizID', '=', $inputt)->get();
-        return view('attemptquiz')
+             return view('attemptquiz')
             ->with('question', $question);
-
+              
 
 
     }
 
 
-    public function searchInventory()
+public function searchInventory()
 
     {
 
 
-
-        $inputt = Input::get('quiz');
-        $input = Input::get('subject');
-        $results = DB::table('addquiz', 'quiz')
-
-
-            ->where('addquiz.quizID', '=', $inputt)
-            ->where('exam.subject', '=', $input)
-            ->join('quiz', 'addquiz.queID', '=', 'quiz.queID')
-            ->join('exam', 'addquiz.quizID', '=', 'exam.quizID')->get();
+               
+                $inputt = Input::get('quiz');
+                $input = Input::get('subject');
+                $results = DB::table('addquiz', 'quiz')
 
 
-        return View::make('attemptquiz')
-            ->with('results', $results);
+                ->where('addquiz.quizID', '=', $inputt)
+                ->where('exam.subject', '=', $input)
+                ->join('quiz', 'addquiz.queID', '=', 'quiz.queID')
+                ->join('exam', 'addquiz.quizID', '=', 'exam.quizID')->get();
+
+                
+                return View::make('attemptquiz')
+                ->with('results', $results);
 
 
-
+                  
     }
-
+    
 
 }

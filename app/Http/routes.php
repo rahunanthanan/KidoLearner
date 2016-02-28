@@ -254,9 +254,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('quizmain','quizmainController@getmain');
     Route::get('addsubject','addsubjectController@getsubject');
     Route::get('managesub','managesubController@getmanage');
+
     Route::get('addquiz','addquizController@getquiz');
     Route::post('addsubject','addsubjectController@addsubject');
-    Route::post('managesub','addsubjectController@editsubject');
+
+    Route::post('managesub','addsubjectController@deletesubject');
+
     Route::post('addquiz','addquizController@addquiz');
 
     Route::get('quizpaper', 'quizpaperController@viewquizp');
@@ -272,8 +275,8 @@ Route::group(['middleware' => ['web']], function () {
 //onchange function for excuse request form
     Route::get('/formc',function(){
         $category=Input::get('category');
-        $zone=\App\subject::where('category','=',$category)->get();
-        return Response::json($zone);
+        $cat_sub=\App\subject::where('category','=',$category)->get();
+        return Response::json($cat_sub);
     });
 
     Route::get('/ques',function(){

@@ -38,6 +38,17 @@
 <body >
 
 
+<div class="row">
+    <div class="col-md-12">
+
+        <h3 class="text-muted text-center">
+            Children Web Learning Application
+        </h3>
+
+
+    </div>
+</div>
+
 <hr style="height:0.7px;border:none;color: #d3d3d3;background-color: #d3d3d3;" />
 
 
@@ -45,19 +56,10 @@
 
 @yield('content2')
 
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10">
-
-           <div class="row">
-
-
-
-
 
 
             <div class="row">
-                  <div class="col-md-1"></div>
+
                   <div class="col-md-10">
 
                        <div class="row">
