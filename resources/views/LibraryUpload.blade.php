@@ -171,17 +171,16 @@
 
 
 
-
                                        <div class="form-group">
                                              <label>Type:</label>
                                            <div class="input-group">
 
                                               <div class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-save"></span>
+                                                  <span class="glyphicon glyphicon-pencil"></span>
                                                </div>
-                                                   <select class="form-control" name="type1" id="type1" style="width: 250px">
-                                                       <option  style="width: auto" id="type1"></option>
-                                                   </select>
+                                                   <input class="form-control" name="type1" id="type1" >
+
+                                                   </input>
 
                                                <script>
 
@@ -218,7 +217,7 @@
                                              <label>Name:</label>
                                            <div class="input-group">
                                               <div class="input-group-addon">
-                                                  <span class="glyphicon glyphicon-save"></span>
+                                                  <span class="glyphicon glyphicon-pencil"></span>
                                                </div>
                                                <input type="text" class="form-control"  name="name">
 
@@ -227,7 +226,7 @@
                                        </div>
 
                                    <div class="form-group">
-                                         <label>Meterial:</label>
+                                         <label>Material:</label>
                                        <div class="input-group">
                                          <input type="file" name="attach">
                                          @if ($errors->has('attach')) <p class="help-block"><font color="red">{{ $errors->first('attach') }}</font></p> @endif
@@ -252,7 +251,7 @@
                                                <label>Published Date:</label>
                                              <div class="input-group">
                                                 <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                    <span class="glyphicon glyphicon-calendar"></span>
                                                  </div>
                                                  <input type="text" class="form-control"name="date">
 
