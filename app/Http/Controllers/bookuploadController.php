@@ -164,7 +164,7 @@ class bookuploadController extends Controller
                 $entry = new librarymeterial();
 
                 $entry->category = Input::get('category');
-                $entry->type = Input::get('type');
+                $entry->type = Input::get('type1');
                 $entry->name = Input::get('name');
                 $entry->attach = $file->getFilename() . '.' . $extension;
                 $entry->original_filename = $file->getClientOriginalName();
