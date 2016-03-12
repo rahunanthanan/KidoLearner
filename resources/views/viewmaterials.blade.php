@@ -12,7 +12,7 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                         <h3 align="center"><strong><font color="green">Available Materials</font></strong></h3>
+                         <h3 align="center"><strong><font color="green">Available Documents</font></strong></h3>
                          <br><hr style="height:1px;border:none;color:deepskyblue;background-color:deepskyblue;" /><br>
                           <h5 align="center"><strong><font color="green"></font></strong></h5>
 
