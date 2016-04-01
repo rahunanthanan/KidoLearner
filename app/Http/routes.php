@@ -272,6 +272,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('createquiz', 'createquizController@createquiz');
 
 
+    Route::get('viewhelpdesk','helpdeskController@viewreply');
+    Route::get('helpdesk','helpdeskController@gethelpdesk');
+    Route::post('helpdesk','helpdeskController@add');
+
+
+    Route::get('hp_reply','hp_replyController@getpage');
+    Route::post('hp_reply','hp_replyController@edit');
+
 //onchange function for excuse request form
     Route::get('/formc',function(){
         $category=Input::get('category');

@@ -106,7 +106,7 @@
                     $(document).ready( function () {
                          $('#table_ID').DataTable().columnFilter()(
                           {
-                             "lengthMenu": [[2, 4, 6, -1], [2, 4, 6, "All"]]
+                             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 
 
                           } );
