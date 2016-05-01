@@ -45,6 +45,7 @@
             <li><a href="/viewentry">Upload Course Materials</a></li>
             <li><a href="/emails">View Feedback</a></li>
             <li><a href="/emails/feedback">Send Feedback</a></li>
+            <li><a href="/showMaterials">Show Course Materials</a></li>
         </ul>
     </div>
 </nav>

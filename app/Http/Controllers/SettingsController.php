@@ -2,252 +2,124 @@
 
 namespace App\Http\Controllers;
 
-//use App\Http\Requests\Request;
-use App\User;
-use App\Child;
-use App\Http\Requests;
-//use views\Profile_Management\Content;
-use View;
-use MyDetails;
-//use Illuminate\Support\Facades\Mail;
-use Fail;
-use Illuminate\Support\Facades\DB;
-use Hash;
-//use CreateProfile;
-use Mail;
-use Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-use Session;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
-use Alert;
-//use JsonSchema\Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Auth;
+use Hash;
+use App\User;
+use Session;
+use Mail;
 
 class SettingsController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs;
 
-    function getViewChangePassword()
+    /**
+     * Handle an authentication attempt.
+     *
+     * @return Response
+     */
+    public function authenticate()
     {
-        return view('Profile_Management.ChangePassword');
-
-    }
-
-    function getViewRecoverPassword()
-    {
-        return view('Profile_Management.RecoverPassword');
-
-    }
-
-    function getViewProfilePicture()
-    {
-        return view('Profile_Management.ProfilePicture');
-
-    }
-
-    function getViewMyDetails()
-    {
-        return view('Profile_Management.MyDetails');
-
-    }
-
-    public function loadMyDetails()
-    {
-        $reg=User::find(3);
-
-        //$pname='Johnny';
-        //$m_last_name = DB::table('registration')->where('FirstName','=',$pname)->value('LastName');
-        return view("Profile_Management.MyDetails", compact('reg'));
-    }
-
-    public function loadProfilePicture()
-    {
-        $reg=User::find(3);
-
-        //$pname='Johnny';
-        //$m_last_name = DB::table('registration')->where('FirstName','=',$pname)->value('LastName');
-        return view("Profile_Management.MyProfile", compact('reg'));
-    }
-
-
-    public function loadMyChildDetails()
-    {
-        $reg1=Child::find(3);
-
-        //$pname='Johnny';
-        //$m_last_name = DB::table('registration')->where('FirstName','=',$pname)->value('LastName');
-        return view("Profile_Management.ViewChild", compact('reg1'));
-    }
-
-    public function changePassword()
-    {
-        ini_set('xdebug.max_nesting_level', 200);
-
-        $validator = Validator::make(
-            [
-                'OldPassword' =>Input::get('old_password'),
-                'NewPassword' => Input::get('new_password'),
-                'ConfirmPassword' => Input::get('confirm_password')
-            ],
-            [
-                'OldPassword' => 'required|min:3',
-                'NewPassword' => 'required|min:3',
-                'ConfirmPassword' => 'required|min:3|same:NewPassword'
-            ],
-            [
-                'required' => 'The :attribute field is required.'
-            ]
-        );
-
-        if($validator->fails())
-        {
-            return view('Profile_Management.ChangePassword',['errors' =>$validator->errors()]);
-        }
-
-        else
-        {
-            session()->put('user','email');
-            $loginId=Input::get('login_id');
-            if(Auth::loginUsingId($loginId))
-            {
-                $newpwd = Input::get('new_password');
-                $name='umamuruges2994@gmail.com';
-                $pwd=Hash::make($newpwd);
-
-                DB::table('user')
-                    ->where('ID', $loginId)
-                    ->update(['Password' => $pwd]);
-
-                $data = ['title' => 'Your Password has been changed!!'];
-              Mail::send('Profile_Management.Content', $data, function ($m)
-              {
-                  $loginID1=Input::get('login_id');
-
-                  $email = DB::table('user')->where('ID', $loginID1)->value('Email');
-
-                  $m->to($email, 'Tester');
-                  $m->subject('Kido Learners!!');
-              });
-
-                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+        $email=Input::get('email');
+        $password = Input::get('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            if(Auth::user()->name == 'Admin')
+                return Redirect::to('courses');
+            elseif(Auth::attempt (['email' => $email, 'password' => $password]))
+                return Redirect::to('/home');
+            else{
+                return view('errors');
             }
         }
     }
 
-    public function recoverPassword()
+    /**
+     * This is used to view the ChangePassword blade.
+     *
+     * @return view
+     */
+    function getViewChangePassword()
+    {
+        ini_set('xdebug.max_nesting_level', 200);
+        return view('auth.passwords.ChangePassword');
+
+    }
+
+
+    /**
+     * Change the user password
+     *
+     *
+     * @return false | array
+     */
+    public function postChangePassword()
     {
         ini_set('xdebug.max_nesting_level', 200);
 
-
-        $validator = Validator::make(
-            [
-                'email' =>Input::get('r_email'),
-                'NewPassword' => Input::get('r_new_password'),
-                'ConfirmPassword' => Input::get('r_confirm_password')
-            ],
-            [
-                'email' => 'required|email',
-                'NewPassword' => 'required|min:3',
-                'ConfirmPassword' => 'required|min:3|same:NewPassword'
-            ],
-            [
-                'required' => 'The :attribute field is required.'
-            ]
-        );
+        $validator = Validator::make(Input::all(),
+                array(
+                    'oldPassword'       => 'required',
+                    'newPassword'       => 'required|min:6',
+                    'confirmPassword'   => 'required|same:newPassword'
+                )
+            );
 
         if($validator->fails())
         {
-            return view('Profile_Management.RecoverPassword',['errors' =>$validator->errors()]);
+            return Redirect::to('/home/ChangePassword')
+                ->withInput()
+                ->withErrors($validator);
         }
 
         else
         {
-            if (User::where('Email', '=', Input::get('r_email'))->exists())
+            $user = User::find(Auth::user()->id);
+
+            $cOldPassword = Input::get('oldPassword');
+            $cNewPassword = Input::get('newPassword');
+
+            if(Hash::check($cOldPassword, $user->getAuthPassword()))
             {
-                $newpwd = Input::get('r_new_password');
-                $username=Input::get('r_email');
-                $pwd=Hash::make($newpwd);
+                $user->password = Hash::make($cNewPassword);
 
-                DB::table('user')
-                    ->where('Email', $username)
-                    ->update(['Password' => $pwd]);
-                $data = ['title' => 'Your Password has been changed!!use this password'];
-                Mail::send('Profile_Management.Content', $data, function ($m) {
+                if($user->save())
+                {
 
-                    $userName=Input::get('r_email');
-                    $m->to($userName, 'Tester');
-                    $m->subject('Kido Learners!!');
-                });
+                    $data = ['title' => 'Your Password has been changed!!'];
+                    Mail::send('auth.passwords.Content', $data, function ($m)
+                    {
 
-                //Alert::success('Successfully Registered');
+                        $mail = Auth::user()->email;
+                        $name = Auth::user()->name;
 
-                return Redirect::to('Success1')->with('message3', 'SUCCESSFULLY CHANGED!!');
+
+                        $m->to($mail, $name);
+                        $m->subject('Kido Learners!!');
+                    });
+
+
+
+
+                    return Redirect::to('/home')
+                        ->with('success', true)->with('message','Your Password has been changed');
+                }
             }
 
             else
             {
-                return Redirect::to('RecoverPassword')->with('message3', 'User Name is invalid');
+                return Redirect::to('/home/ChangePassword')
+                    ->with('fail', true)->with('message1','Your Old Password is incorrect');
             }
         }
+
+        return Redirect::to('/home/ChangePassword')
+            ->with('fail', true)->with('message1','Your password could not be changed');
     }
-
-    public function uploadProfilePicture()
-    {
-        ini_set('xdebug.max_nesting_level', 200);
-
-        $validator = Validator::make(
-            [
-                'Picture' =>Input::get('filefield'),
-            ],
-            [
-                'Picture' => 'image',
-            ],
-            [
-                'required' => 'The :attribute field is required.'
-            ]
-        );
-
-        if($validator->fails())
-        {
-            return view('Profile_Management.ProfilePicture',['errors' =>$validator->errors()]);
-        }
-
-        else
-        {
-            session()->put('user','email');
-            $loginId=Input::get('login_id');
-            if(Auth::loginUsingId($loginId)) {
-
-                $file = Request::file('filefield');
-                $extension = $file->getClientOriginalExtension();
-                Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
-
-                $destinationPath = 'C:\wamp\www\KidoLearner\Uploads';
-                $filename = $file->getClientOriginalName();
-                Input::file('filefield')->move($destinationPath, $filename);
-
-                $file = Input::file('filefield');
-                $input = array('filefield' => $file);
-                $rules = array(
-                    'filefield' => 'image'
-                );
-
-                DB::table('user')
-                    ->where('ID', $loginId)
-                    ->update(['ProfilePicture' => $filename]);
-
-
-                return Redirect::to('Success3')->with('message3', 'SUCCESSFULLY CHANGED!!');
-            }
-        }
-    }
-
 }

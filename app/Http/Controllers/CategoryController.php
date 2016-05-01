@@ -74,14 +74,11 @@ class CategoryController extends Controller{
 
     }
 
-
     public function edit($id)
     {
-
         $category=Category::find($id);
 
         return view('category.edit',compact('category',$category));
-
     }
 
     public function update($id){
@@ -105,9 +102,10 @@ class CategoryController extends Controller{
             return redirect('category');
 
 
-        }else{
-
-            //  Session::flash('flash_category_empty',''); //<--FLASH MESSAGE
+        }
+        else
+        {
+            Session::flash('flash_category_empty',''); //<--FLASH MESSAGE
 
             return redirect('category');
         }

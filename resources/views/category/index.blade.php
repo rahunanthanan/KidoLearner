@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('layouts.app')
 
 
 @section('content')
@@ -8,10 +8,31 @@
 
 
 
+    <!-- side navigation bar-->
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
 
 
-    <h1>Kido Learner Courses</h1>
-    <a href="{{url('/category/create')}}" class="btn btn-success">Add Group</a>
+        @include('layouts.adminSidenavbar')
+
+
+    </div>
+
+
+    <div class="col-md-2 col-md-offset-0"></div>
+    <div class="container w3-animate-zoom">
+        <div class="col-md-7 col-md-offset-0">
+            <div class="row">
+                <div class="col-md-20 col-md-offset-0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading "  style="background-color: #004280; color: white">Group</div>
+                        <div class="panel-body" style="background-color: #e6eeff">
+
+
+                            <br>
+
+
+     <a href="{{url('/category/create')}}" class="btn btn-success">Add Group</a>
 
 
 
@@ -56,9 +77,9 @@
                 <td><a href="{{route('subCategory.show',$book->id)}}" class="btn btn-primary">Add Subject</a></td>
                 <td><a href="{{route('category.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'onsubmit' => 'return ConfirmDelete()', 'route'=>['category.destroy', $book->id]]) !!}
+                   {{-- {!! Form::open(['method' => 'DELETE', 'onsubmit' => 'return ConfirmDelete()', 'route'=>['category.destroy', $book->id]]) !!}--}}
 
-
+                    {!! Form::open(['method' => 'DELETE', 'onclick'=>'javascript:return ConfirmDelete()', 'route'=>['category.destroy', $book->id]]) !!}
 
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger' , 'name' =>'delcat','onsubmit' => 'return ConfirmDelete()']) !!}
                     {!! Form::close() !!}
@@ -75,11 +96,12 @@
     </table>
 
 
-    <script>
-
-
-
-    </script>
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

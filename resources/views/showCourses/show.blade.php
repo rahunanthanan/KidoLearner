@@ -1,6 +1,32 @@
-@extends('layout/template')
+@extends('layouts.app')
+
 @section('content')
-    <h1>About Course</h1>
+
+
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.adminSidenavbar')
+
+
+    </div>
+
+    <!-- container -->
+
+    <div class="col-md-2 col-md-offset-0"></div>
+    <div class="container w3-animate-zoom">
+        <div class="col-md-7 col-md-offset-0">
+            <div class="row">
+                <div class="col-md-20 col-md-offset-0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading "  style="background-color: #004280; color: white">About Lesson</div>
+                        <div class="panel-body" style="background-color: #e6eeff">
+
+
+                            <br>
+
+
 
     <form class="form-horizontal">
         <div class="form-group">
@@ -40,5 +66,16 @@
                 <a href="{{ url('courses')}}" class="btn btn-primary">Back</a>
             </div>
         </div>
+
+
+
+
+
     </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> </div></div>
+
 @stop

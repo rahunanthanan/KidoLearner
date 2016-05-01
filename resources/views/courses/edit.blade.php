@@ -1,4 +1,5 @@
-@extends('layout.template')
+
+@extends('layouts.app')
 
 @section('content')
 
@@ -11,14 +12,35 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-    <h1>Update Course</h1>
+
+    <!-- side navigation bar-->
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.adminSidenavbar')
+
+
+    </div>
+
+    <!-- container -->
+
+    <div class="col-md-2 col-md-offset-0"></div>
+    <div class="container w3-animate-zoom">
+        <div class="col-md-7 col-md-offset-0">
+            <div class="row">
+                <div class="col-md-20 col-md-offset-0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading "  style="background-color: #004280; color: white">Lessons</div>
+                        <div class="panel-body" style="background-color: #e6eeff">
+
+
+                            <br>
 
 
 
-    {{--{{ Form::model($course,array('route' =>array('CourseController.edit',$course->id))) }}--}}
 
-    {!! Form::model($course,['method' => 'PATCH','route'=>['courses.update',$course->id]]) !!}
-
+    {!! Form::model($course,['method' => 'PATCH','route'=>['courses.update',$course->id ],'files' => true]) !!}
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}
@@ -91,6 +113,13 @@
     </div>
 
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <script>
 
         $('#category').on('change',function(e){
@@ -120,5 +149,8 @@
 
     </script>
     {!! Form::close() !!}
+
+    </div>
+
 
 @stop

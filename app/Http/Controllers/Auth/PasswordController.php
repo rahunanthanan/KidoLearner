@@ -27,6 +27,7 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
+        ini_set('xdebug.max_nesting_level', 200);
         $this->middleware('guest');
     }
 }

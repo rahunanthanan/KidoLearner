@@ -19,6 +19,7 @@ use Alert;
 use App\Providers\SweetAlertServiceProvider;
 use Validator;
 use Redirect;
+use DB;
 
 
 
@@ -51,6 +52,46 @@ class CourseController extends Controller
 
     }
 
+
+    public function categorizelesson(){
+
+        $courses=Course::all();
+
+        $subcat=$courses->category;
+        $categoryname=Category::all();
+
+
+        /*$subcat=Input::get('subcategory');*/
+
+
+
+
+       $catlesson=DB::table('courses')
+
+                ->where('subcat', '=','2')
+                ->select('name')
+                ->get();
+
+
+        foreach ($courses as  $value) {
+
+              echo  $value;
+
+             }
+
+
+
+
+
+        return view('courses.catView',compact('courses','categoryname','catlesson'));
+
+    }
+
+
+
+
+    // create courses
+
     public function create(){
 
         $categories=Category::all();
@@ -58,6 +99,8 @@ class CourseController extends Controller
         return view('courses.create')->with('categories',$categories);
 
     }
+
+    // add details to the course
 
     public function store()
     {
@@ -86,7 +129,8 @@ class CourseController extends Controller
             $file = Request::file('filefield');
 
 
-            if ($file !== null) {
+            if ($file != null) {
+
                 $extension = $file->getClientOriginalExtension();
                 Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
 
@@ -131,6 +175,9 @@ class CourseController extends Controller
 
     public function update($id){
 
+
+        $course=Course::find($id);
+
         // validation fields
         $rules = array(
             'name' => 'Required',
@@ -150,22 +197,20 @@ class CourseController extends Controller
             $file = Request::file('filefield');
 
 
-            if ($file !== null)
+            if ($file !=  null)
              {
                  $extension = $file->getClientOriginalExtension();
                  Storage::disk('local')->put($file->getFilename() . '.' . $extension, File::get($file));
 
                  $destinationPath = 'Uploads/';
                  $filename = $file->getClientOriginalName();
-                  Input::file('filefield')->move($destinationPath, $filename);
-              //  $course->img = $file->getClientOriginalName();
+                 Input::file('filefield')->move($destinationPath, $filename);
+                 $course->img = $file->getClientOriginalName();
 
              }
 
-            $course = new Course();
-            $course->name = Input::get('name');
+
             $courseUpdate = Request::all();
-            $course = Course::find($id);
 
             $course->update($courseUpdate);
 
@@ -190,6 +235,8 @@ class CourseController extends Controller
     public function destroy($id){
 
         Course::find($id)->delete();
+        Alert::success('Deleted');
+
         return redirect('courses');
 
     }

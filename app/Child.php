@@ -6,14 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Child extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'child';
     public static $rules = array(
 
-        'c_name' => 'required',
-        'c_dob' => 'required',
-        'c_grade' => 'required',
-        'c_school' => 'required',
+        'id' => 'required',
+        'parentId' => 'required',
+        'fName' => 'required|alpha',
+        'lName' => 'required|alpha',
+        /*'dateOfBirth' => '',
+        'grade' => 'required',*/
+        'school' => 'required|alpha'
+
     );
-
-
 }

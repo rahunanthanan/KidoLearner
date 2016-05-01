@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('layouts.app')
 
 @section('content')
 
@@ -14,6 +14,28 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
+<!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.adminSidenavbar')
+
+
+</div>
+
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-7 col-md-offset-0">
+        <div class="row">
+            <div class="col-md-20 col-md-offset-0">
+                <div class="panel panel-default">
+                    <div class="panel-heading "  style="background-color: #004280; color: white">Course Materials</div>
+                    <div class="panel-body" style="background-color: #e6eeff">
+
+
+                        <br>
 
 
 
@@ -24,42 +46,50 @@
 
 
 
-<div class="form-group">
-    {!! Form::label('name','Name:') !!}
-    {!! Form::text('name',null,['class'=>'form-control']) !!}
-</div>
+        <div class="form-group">
+            {!! Form::label('name','Name:') !!}
+
+            {!! Form::text('name',null,['class'=>'form-control']) !!}
+
+        </div>
 
 
-@if ($errors->has('name')) <p class="help-block" style="color:red">{{ $errors->first('name') }}</p> @endif
+   {{--Error message for name field    --}}
 
-
-
-<div class="form-group">
-    <label for="">Group</label>
-    <select class="form-control input-sm" name="category" id="category">
-
-        @foreach($categories as $category)
-
-            <option value="{{$category->id}}">{{$category->name}}</option>
-
-        @endforeach
-    </select>
-
-
-</div>
-<div class="form-group">
-    <label for="">Activity</label>
-    <select class="form-control input-sm" name="subcategory" id="subcategory">
+   @if ($errors->has('name')) <p class="help-block" style="color:red">{{ $errors->first('name') }}</p> @endif
 
 
 
-        <option value=""></option>
+        <div class="form-group">
+
+            <label for="">Group</label>
 
 
-    </select>
+            <select class="form-control input-sm" name="category" id="category">
+
+                @foreach($categories as $category)
+
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+
+                @endforeach
+
+            </select>
 
 
-</div>
+        </div>
+
+
+    <div class="form-group">
+        <label for="">Activity</label>
+
+
+        <select class="form-control input-sm" name="subcategory" id="subcategory">
+
+            <option value=""></option>
+
+        </select>
+
+    </div>
 
 
 
@@ -126,5 +156,11 @@
 
 
 
-{!! Form::close() !!}
+ {!! Form::close() !!}
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
 @stop

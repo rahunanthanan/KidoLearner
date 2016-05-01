@@ -2,26 +2,19 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-//use Illuminate\Contracts\Auth\CanResetPassword;
-//use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Item;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Authenticatable
 {
-    use Authenticatable,CanResetPassword;
-
-    protected $table = 'user';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [ 'UserName', 'Password'];
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -32,20 +25,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password', 'remember_token',
     ];
 
-    public function getAuthIdentifier()
+    /**
+     * Get the password for the user
+     *
+     * @return string
+     */
+    public function getAuthPassword()
     {
-        return $this->getKey();
-    }
-    public function getAuthPassword() {
-        return $this->Password;
+        return $this->password;
     }
 
-    public static $rules = array(
-
-
-        'name' => 'required',
-        'email' => 'required|email|unique:user',
-        'password' => 'required|alphaNum|min:3',
-        'ConfirmPassword' => 'required|min:3|same:password'
-    );
+    /*public function items()
+    {
+        return $this->hasMany('Item','owner_id');
+    }*/
 }

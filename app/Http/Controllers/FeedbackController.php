@@ -30,18 +30,37 @@ class FeedbackController extends Controller{
     public function store()
     {
 
-        $feed = new Feedback();
+        $rules = array(
+            'first_name' => 'Required|alpha',
+            'email' => 'Required|email'
 
-        $feed->name = Input::get('first_name');
-        $feed->email_addr = Input::get('email');
-        $feed->comment = Input::get('message');
-        $feed->dateAndTime=date('Y-m-d H:i:s');
 
-        $feed->save();
 
-        Alert::message('Thanks for comment!')->persistent('Close');
+        );
 
-        return view('emails.feedback');
+        $validation = Validator::make(Input::all(),$rules);
+
+
+
+        if($validation->passes()) {
+
+            $feed = new Feedback();
+            $feed->name = Input::get('first_name');
+            $feed->email_addr = Input::get('email');
+            $feed->comment = Input::get('message');
+            $feed->dateAndTime = date('Y-m-d H:i:s');
+
+            $feed->save();
+
+            Alert::message('Thanks for comment!')->persistent('Close');
+
+            return view('emails.feedback');
+        }
+
+        else {
+
+            return view('emails.feedback')->withErrors($validation);
+        }
     }
 
     /*    public function getFeedform(){
@@ -96,13 +115,7 @@ class FeedbackController extends Controller{
         //return view('showCourses.show',compact('courses'))->with('categories',$categories);
     }
 
-    public function destroy($id){
 
-        Feedback::find($id)->delete();
-        Alert::success("Sucessfully Deleted");
-        return redirect('emails');
-
-    }
 
 
 }

@@ -3,6 +3,8 @@
 
 @section('content')
 
+
+
     <legend class="text-center header">Feed Back</legend>
 
 
@@ -19,7 +21,7 @@
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="glyphicon glyphicon-user bigicon"></i></span>
                             <div class="col-md-8">
                                 <input  name="first_name" type="text" placeholder="First Name" class="form-control" required/>
-
+                                @if ($errors->has('first_name')) <p class="help-block" style="color:red">{{ $errors->first('first_name') }}</p> @endif
                             </div>
                         </div>
 
@@ -28,6 +30,7 @@
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="glyphicon glyphicon-envelope bigicon"></i></span>
                             <div class="col-md-8">
                                 <input type="email"  name="email" type="text" placeholder="Email Address" class="form-control" required>
+                                @if ($errors->has('email')) <p class="help-block" style="color:red">{{ $errors->first('email') }}</p> @endif
                             </div>
                         </div>
 
@@ -56,7 +59,7 @@
             </div>
         </div>
     </div>
-
+@endsection
     <style>
         .header {
             color: #36A0FF;
