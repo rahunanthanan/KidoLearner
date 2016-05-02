@@ -212,46 +212,22 @@ Route::group(['middleware' => ['web']], function () {
      */
     Route::delete('/AddChild/{child}', 'ChildController@deleteChild');
 
-   /* Route::get('Success', 'SignUpController@success');
+    /**
+     * To view Edit Child Form
+     */
+    Route::post('/EditChild', 'ChildController@getEditChildView');
 
-    Route::get('Success1', 'SignUpController@success1');
+    /**
+     * To add values in child edit form
+     */
+    Route::get('/EditChild', 'ChildController@pushChild');
 
-    Route::get('Success2', 'SignUpController@success2');
-
-    Route::get('Success3', 'SignUpController@success3');
-
-    Route::get('LoginUser', 'UserController@getViewLogin');
-    Route::post('LoginUser', 'UserController@postLogin');//
-
-    Route::get('MyProfile', 'UserController@getViewMyProfile');
-
-    Route::get('ChangePassword', 'SettingsController@getViewChangePassword');
-    Route::post('ChangePassword', 'SettingsController@changePassword');
-
-    Route::get('MyDetails', 'SettingsController@loadMyDetails');
-    Route::post('Logout', 'UserController@getSignOut');
-
-    Route::get('Child', 'UserController@getViewChild');
-    Route::post('Child', 'UserController@postChild');
-
-    Route::get('MyChildDetails', 'SettingsController@loadMyChildDetails');
-
-    Route::get('ProfilePicture', 'SettingsController@getViewProfilePicture');
-    Route::post('ProfilePicture', 'SettingsController@uploadProfilePicture');
-
-    Route::get('MyProfile', 'SettingsController@loadProfilePicture');
-
-    Route::get('RecoverPassword', 'SettingsController@getViewRecoverPassword');
-    Route::post('RecoverPassword', 'SettingsController@recoverPassword');
-
-    Route::get('CreateProfile','SignUpController@getRegister');
-//Route::get('/CreateProfile','SignUpController@postRegister');
-    Route::post('CreateProfile','SignUpController@postRegister');*/
-
-//Route::get('Fail','SignUpController@failure');
+    Route::get('/EditChild', 'ChildController@showChildDetails');
 
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////
     Route::post('/jobs/reposition', function () {
         if (Input::has('item')) {
             $i = 0;
