@@ -20,23 +20,53 @@ use App\Providers\SweetAlertServiceProvider;
 use Validator;
 use Redirect;
 
+
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers
+ *
+ * Group management
+ *
+ */
+
+
 class CategoryController extends Controller{
 
 
-    public function index(){
+    /**
+     * View the created details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function index()
+
+    {
 
         $categories=Category::all();
         return view('category.index',compact('categories'));
 
     }
 
+    /**
+     * Create the details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
 
+    public function create()
 
-    public function create(){
+    {
 
         return view('category.create');
 
     }
+
+    /**
+     * Store the details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function store()
     {
@@ -49,7 +79,8 @@ class CategoryController extends Controller{
         $validation = Validator::make(Input::all(),$rules);
 
 
-        if( $validation->passes() ) {
+        if( $validation->passes() )
+        {
 
             $category = new Category();
             $category->name = Input::get('name');
@@ -61,18 +92,22 @@ class CategoryController extends Controller{
             return redirect('category');
 
 
-        } else {
+        }
+        else
+        {
 
             Session::flash('flash_category_empty',''); //<--FLASH MESSAGE
             return view('category.create');
 
         }
 
-
-
-
-
     }
+
+    /**
+     * Edit the details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function edit($id)
     {
@@ -81,7 +116,14 @@ class CategoryController extends Controller{
         return view('category.edit',compact('category',$category));
     }
 
-    public function update($id){
+    /**
+     * Update the edited  details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update($id)
+    {
 
 
         $rules = array(
@@ -111,11 +153,17 @@ class CategoryController extends Controller{
         }
 
 
-
-
     }
 
-    public function destroy($id){
+
+    /**
+     * delete the details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function destroy($id)
+    {
 
 
 

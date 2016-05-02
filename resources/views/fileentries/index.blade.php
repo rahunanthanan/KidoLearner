@@ -84,7 +84,7 @@
 
                 <td>{{ $entry->date }}</td>
 
-                <td><a href="{{route('fileentries.edit',$entry->id)}}" class="btn btn-warning">Update</a></td>
+              {{--  <td><a href="{{route('fileentries.edit',$entry->id)}}" class="btn btn-warning">Update</a></td>--}}
 
                     {!! Form::open(['method' => 'DELETE', 'route'=>['fileentries.destroy', $entry->id]]) !!}
 

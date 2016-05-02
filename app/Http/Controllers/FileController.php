@@ -15,7 +15,25 @@ use App\Category;
 use UxWeb\SweetAlert\SweetAlert;
 use Validator;
 
+/**
+ * Class FileController
+ * @package App\Http\Controllers
+ *
+ * Coursematerials management
+ *
+ */
+
+
+
+
 class FileController extends Controller {
+
+
+    /**
+     * Show the uploaded file details
+     *
+     * @return \Illuminate\Http\Response
+     */
 
 
     public function index()
@@ -25,7 +43,7 @@ class FileController extends Controller {
         $categoryname=Category::all();
         $entries = Fileentry::all();
 
-       $lessonName=DB::table('courses')
+        $lessonName=DB::table('courses')
             ->join('fileentries', 'courses.id', '=', 'fileentries.lesson')
 
             ->select('courses.name')
@@ -35,9 +53,14 @@ class FileController extends Controller {
         return view('fileentries.index', compact('entries','courses','categoryname','lessonName'));
     }
 
-    // View the uploaded file details
+    /**
+     * View the uploaded file details
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function show(){
+    public function show()
+    {
 
 
         $categoryname=Category::all();
@@ -56,17 +79,24 @@ class FileController extends Controller {
     }
 
 
-    //store the details of uploaded file in database
+    /**
+     * Store the details of uploaded file in database
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function store() {
+
+    public function store()
+    {
 
 
-        // validation fields of uploaded file page
+        // Validation fields of uploaded file page
+        // file type should be image/pdf/docx/pptx and maximum size is 100MB
         $rules = array(
 
             'category' => 'Required',
             'subcategory'=>'Required',
-            'filefield'=>'Required|mimes:jpeg,bmp,png,pdf,docx,ppt',
+            'filefield'=>'Required|mimes:jpeg,bmp,png,pdf,docx,ppt|max:102400',
 
 
 
@@ -74,7 +104,8 @@ class FileController extends Controller {
 
         $validation = Validator::make(Input::all(),$rules);
 
-        if( $validation->passes() ) {
+        if( $validation->passes() )
+        {
 
 
             $entry = new Fileentry();
@@ -84,10 +115,13 @@ class FileController extends Controller {
             $entry->date=date('Y-m-d');
 
 
-            // get the input from filefield in blade page
+            // Get the input from filefield in blade page
             $file = Request::file('filefield');
 
-             if ($file != null) {
+            // check the filefield is empty
+
+            if ($file != null)
+            {
 
                 $file = Request::file('filefield');
                 $extension = $file->getClientOriginalExtension();
@@ -96,8 +130,8 @@ class FileController extends Controller {
 
                 $entry->mime = $file->getClientMimeType();
 
-                 // store the files under the "MyFiles folder
-                 $destinationPath = 'Myfiles/';
+                // store the files under the "MyFiles folder
+                $destinationPath = 'Myfiles/';
 
 
                 $filename = $file->getClientOriginalName();
@@ -107,7 +141,7 @@ class FileController extends Controller {
                 Input::file('filefield')->move($destinationPath, $filename);
 
                 $entry->filename = $file->getFilename() . '.' . $extension;
-             }
+            }
 
             $entry->save();
 
@@ -136,19 +170,28 @@ class FileController extends Controller {
 
     }
 
-/*    public function get($filename){
+    /*    public function get($filename){
 
-        $entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
-        $file = Storage::disk('local')->get($entry->filename);
+            $entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
+            $file = Storage::disk('local')->get($entry->filename);
 
-        return (new Response($file, 200))
-            ->header('Content-Type', $entry->mime);
-    }*/
+            return (new Response($file, 200))
+                ->header('Content-Type', $entry->mime);
+        }*/
 
 
-    // retirve details of
 
-    public function create(){
+
+
+    /**
+     * Show the uploaded file details
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function create()
+    {
 
         $categories=Category::all();
         $subcategories=Subcategory::all();
@@ -157,6 +200,12 @@ class FileController extends Controller {
 
     }
 
+
+    /**
+     * Edit the uploaded file details
+     *
+     * @return \Illuminate\Http\Response
+     */
 
 
     public function edit($id)
@@ -183,9 +232,15 @@ class FileController extends Controller {
 
     }
 
-    // update the uploaded file details
 
-    public function update($id){
+    /**
+     * Upload the edit file details
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update($id)
+    {
 
         $entry = Fileentry::find($id);
         // validation fields
@@ -203,7 +258,10 @@ class FileController extends Controller {
 
         $file = Request::file('filefield');
 
-        if( $validation->passes() ) {
+        // validation for file upload
+
+        if( $validation->passes() )
+        {
 
             if ($file !=  null)
             {
@@ -262,13 +320,17 @@ class FileController extends Controller {
     }
 
 
-    // delete the details of uploadedfile
+    /**
+     * Delete the uploaded file details
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function destroy($id){
 
         Fileentry::find($id)->delete();
 
-     // Sucess message for deleted file
+        // Sucess message for deleted file
         Alert::success('File Deleted');
 
 
