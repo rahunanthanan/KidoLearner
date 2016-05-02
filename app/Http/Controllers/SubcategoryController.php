@@ -21,6 +21,8 @@ use App\Providers\SweetAlertServiceProvider;
 use DB;
 use Validator;
 
+
+
 class SubcategoryController extends Controller{
 
 
@@ -33,6 +35,15 @@ class SubcategoryController extends Controller{
     //return view('subCategory.index');
 
     // }
+
+
+
+    /**
+     * View the created details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
 
     public function show($id){
 
@@ -55,6 +66,15 @@ class SubcategoryController extends Controller{
 
         }*/
 
+
+    /**
+     * Create the  details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+
     public function create($id){
 
         $cat=Category::find($id);
@@ -69,6 +89,14 @@ class SubcategoryController extends Controller{
         return view('subCategory.create',compact('cat','subcat'));
 
     }
+
+
+    /**
+     * Store the  details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
 
     public function store()
     {
@@ -86,70 +114,85 @@ class SubcategoryController extends Controller{
         return redirect('category');
 
 
-/*        $cat=Category::find($id);
+        /*        $cat=Category::find($id);
 
-        $subcat = DB::table('subcategories')
-            ->where('category_id', '=', $cat->id)
-            //e    ->select('name')
-            ->get();
+                $subcat = DB::table('subcategories')
+                    ->where('category_id', '=', $cat->id)
+                    //e    ->select('name')
+                    ->get();
 
-        return view('subCategory.show',compact('cat','subcat'));
+                return view('subCategory.show',compact('cat','subcat'));
 
 
-        /*        $categoryUpdate=Request::all();
-                $category=Category::fid($id);
-                $category->update($categoryUpdate);
-                return redirect('category');*/
+                /*        $categoryUpdate=Request::all();
+                        $category=Category::fid($id);
+                        $category->update($categoryUpdate);
+                        return redirect('category');*/
 
 
         //return view('subCategory.show');
     }
 
 
-        public function edit($id)
+    /**
+     *  Edit the  details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function edit($id)
+    {
+
+        $subcategory=Subcategory::find($id);
+
+        return view('subCategory.edit',compact('subcategory',$subcategory));
+
+    }
+
+
+    /**
+     *  Edit the  details of group
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update($id)
+    {
+
+
+        $rules = array(
+            'name' => 'Required'
+
+        );
+
+        $validation = Validator::make(Input::all(),$rules);
+
+        if( $validation->passes() )
         {
+
+
+            $subcategoryUpdate = Request::all();
+            $subcategory = Subcategory::find($id);
+            $subcategory->update($subcategoryUpdate);
+
+            Alert::success('Successfully Updated');
+
+            return redirect('category');
+        }
+        else
+
+        {
+
+
 
             $subcategory=Subcategory::find($id);
 
-            return view('subCategory.edit',compact('subcategory',$subcategory));
+            return view('subCategory.edit',compact('subcategory',$subcategory))->withErrors($validation);
+
 
         }
 
-       public function update($id)
-       {
-
-
-           $rules = array(
-               'name' => 'Required'
-
-           );
-
-           $validation = Validator::make(Input::all(),$rules);
-
-           if( $validation->passes() )
-           {
-
-
-               $subcategoryUpdate = Request::all();
-               $subcategory = Subcategory::find($id);
-               $subcategory->update($subcategoryUpdate);
-
-               Alert::success('Successfully Updated');
-
-               return redirect('category');
-           }
-           else
-
-           {
-
-
-
-               $subcategory=Subcategory::find($id);
-
-               return view('subCategory.edit',compact('subcategory',$subcategory))->withErrors($validation);
-
-
-           }
 
 
 
@@ -164,8 +207,7 @@ class SubcategoryController extends Controller{
 
 
 
-
-       }
+    }
 
     /*   public function destroy($id){
 

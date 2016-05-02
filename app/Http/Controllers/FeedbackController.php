@@ -17,14 +17,37 @@ use App\Quotation;
 use Illuminate\Html;
 use Alert;
 
+/**
+ * Class FeedbackController
+ * @package App\Http\Controllers
+ *
+ * Manage the feedback
+ *
+ */
+
+
 class FeedbackController extends Controller{
 
+    /**
+     * Show the feedback
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function show() {
+
+    public function show()
+    {
 
 
         return view('emails.feedback');
     }
+
+
+    /**
+     * Store the information of feedback in database
+     *
+     * @return \Illuminate\Http\Response
+     */
 
 
     public function store()
@@ -42,7 +65,10 @@ class FeedbackController extends Controller{
 
 
 
-        if($validation->passes()) {
+        if($validation->passes())
+        {
+
+            // store the feedback
 
             $feed = new Feedback();
             $feed->name = Input::get('first_name');
@@ -57,7 +83,8 @@ class FeedbackController extends Controller{
             return view('emails.feedback');
         }
 
-        else {
+        else
+        {
 
             return view('emails.feedback')->withErrors($validation);
         }
@@ -104,7 +131,17 @@ class FeedbackController extends Controller{
 
      }*/
 
-    public function index(){
+
+    /**
+     * Show the feedback information
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+
+    public function index()
+    {
 
         $feed = DB::table('email')
             ->orderBy('dateAndTime', 'desc')

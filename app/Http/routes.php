@@ -17,27 +17,35 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('subCategory/create/{catId}', 'subCategoryController@create');
 
 
+    /**
+     * Course create,edit,delete,view routes
+     */
 
 
-    // course routes
 
     Route::resource('courses', 'CourseController');
 
 
+    /**
+     * Group create,update,delete,view routes
+     */
 
-    // category routes
 
     Route::resource('category', 'CategoryController');
 
 
+    /**
+     * Subject create,update,delete,view routes
+     */
 
 
-    // subcategory routes
 
      Route::resource('subCategory','SubcategoryController');
 
 
-    //feedback routes
+    /**
+     *
+     */
 
 
      Route::resource('emails', 'FeedbackController');
@@ -55,6 +63,8 @@ Route::group(['middleware' => ['web']], function () {
 
     //file upload routes
 
+
+    Route::resource('fileentries', 'FileController');
 
     Route::get('viewentry','FileController@index');
 
