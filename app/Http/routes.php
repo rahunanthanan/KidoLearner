@@ -143,9 +143,76 @@ Route::group(['middleware' => ['web']], function () {
 
     /*----Umatharsini Routes ----------*/
 
+    Route::auth();
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/home', 'HomeController@index');
+
+    /*
+    *   Redirect Auth Users to Respective Pages
+    */
+    Route::post('/login', 'SettingsController@authenticate');
+
+    /*
+     *CSRF protection group
+     */
+    Route::group(array('before'=>'csrf'), function(){
+        /*
+         * Change password (POST)
+         */
+        Route::post('/home/ChangePassword','SettingsController@postChangePassword');
+    });
 
 
-    Route::get('Success', 'SignUpController@success');
+    /*
+    *   Change password (GET) SettingsController@getViewChangePassword
+    */
+    Route::get('/home/ChangePassword', 'SettingsController@getViewChangePassword');
+
+    /*
+    *   ToDoList (GET) ToDoListController@getToDoList
+    */
+    // Route::get('/home/ToDoList', 'ToDoListController@getToDoList');
+
+    /**
+     * Show Task Dashboard
+     */
+    Route::get('/task', 'ToDoListController@getToDoList');
+
+    /**
+     * Add New Task
+     */
+    Route::post('/task','ToDoListController@postToDoList');
+
+    /**
+     * Delete Task
+     */
+    Route::delete('/task/{task}', 'ToDoListController@deleteTask');
+
+    /**
+     * To view Admin Panel
+     */
+    Route::get('/admin', 'AdminController@getViewAdminPage');
+
+    /**
+     * To view Child Form
+     */
+    Route::get('/AddChild', 'ChildController@getChildView');
+
+    /**
+     * Add New Child
+     */
+    Route::post('/AddChild','ChildController@postChild');
+
+    /**
+     * Delete Child
+     */
+    Route::delete('/AddChild/{child}', 'ChildController@deleteChild');
+
+   /* Route::get('Success', 'SignUpController@success');
 
     Route::get('Success1', 'SignUpController@success1');
 
@@ -179,7 +246,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('CreateProfile','SignUpController@getRegister');
 //Route::get('/CreateProfile','SignUpController@postRegister');
-    Route::post('CreateProfile','SignUpController@postRegister');
+    Route::post('CreateProfile','SignUpController@postRegister');*/
 
 //Route::get('Fail','SignUpController@failure');
 
