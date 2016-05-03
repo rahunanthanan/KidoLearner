@@ -39,21 +39,29 @@ Route::group(['middleware' => ['web']], function () {
      */
 
 
+    Route::resource('subCategory','SubcategoryController');
 
-     Route::resource('subCategory','SubcategoryController');
+    // categorize course routes
+
+    Route::get('/catView', 'CourseController@categorizelesson');
+
+
+
 
 
     /**
-     *
+     * send feedback route
      */
 
 
-     Route::resource('emails', 'FeedbackController');
+    Route::resource('emails', 'FeedbackController');
 
-     //Route:post('subCategory/create/{catId}','FeedbackController@destroy');
+    //Route:post('subCategory/create/{catId}','FeedbackController@destroy');
 
 
-
+    /**
+     * view feedback route
+     */
 
 
     Route::get('/emails/feedback', 'ContactController@getContactForm');
@@ -61,16 +69,26 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('contact_request', 'ContactController@getContactUsForm');
 
 
-    //file upload routes
-
+    /**
+     * File upload download,view,update,delete routes
+     */
 
     Route::resource('fileentries', 'FileController');
+
 
     Route::get('viewentry','FileController@index');
 
     Route::post('addentry','FileController@add');
 
-    Route::get('fileentry/get/{filename}','FileController@get');
+    Route::get('showMaterials','FileController@show');
+
+    /**
+     * View course materilas to parent
+     */
+
+
+    Route::get('/showParent','FileController@showParents');
+
 
     /*Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileController@get']);*/
 
@@ -92,9 +110,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
     });
-  //  Route::get('fileentry', 'FileEntryController@index');
+    //  Route::get('fileentry', 'FileEntryController@index');
 
-  //  Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileEntryController@get']);
+    //  Route::get('fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'FileEntryController@get']);
 
     /*Route::post('fileentry/add',['as' => 'addentry', 'uses' => 'FileEntryController@add']);*/
 
@@ -119,10 +137,10 @@ Route::group(['middleware' => ['web']], function () {
 
     });*/
 
-/*
-    Route::get('feedback', 'FeedbackController@getFeed');
+    /*
+        Route::get('feedback', 'FeedbackController@getFeed');
 
-    Route::post('feedback_request', 'FeedbackController@getFeedform');*/
+        Route::post('feedback_request', 'FeedbackController@getFeedform');*/
 
 
 //Route::get('jobs','JobController@drag');
@@ -282,8 +300,8 @@ Route::post('Viewcourse','ViewcourseController@add');
 
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 
@@ -301,37 +319,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('addquiz','addquizController@addquiz');
 
 
-
-    Route::get('quizmain','quizmainController@getmain');
-    Route::get('addsubject','addsubjectController@getsubject');
-    Route::get('managesub','managesubController@getmanage');
-
-    Route::get('addquiz','addquizController@getquiz');
-    Route::post('addsubject','addsubjectController@addsubject');
-
-    Route::post('managesub','addsubjectController@deletesubject');
-
-    Route::post('addquiz','addquizController@addquiz');
-
-    Route::get('quizpaper', 'quizpaperController@viewquizp');
-
-
-    Route::get('attemptquiz', 'quizpaperController@attempt');
-    Route::post('attemptquiz', 'quizpaperController@searchInventory');
-
-    Route::get('createquiz', 'createquizController@viewque');
-    Route::post('createquiz', 'createquizController@createquiz');
-
-
-    Route::get('viewhelpdesk','helpdeskController@viewreply');
-    Route::get('helpdesk','helpdeskController@gethelpdesk');
-    Route::post('helpdesk','helpdeskController@add');
-
-
-    Route::get('hp_reply','hp_replyController@getpage');
-    Route::post('hp_reply','hp_replyController@edit');
-
-
 //onchange function for excuse request form
     Route::get('/formc',function(){
         $category=Input::get('category');
@@ -342,31 +329,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/ques',function(){
         $id=Input::get('quID');
         $sub=\App\quiz::where('queID','=',$id)->get();
-
-        return Response::json($sub);
-    });
-
-    Route::get('/quiz',function(){
-        $id=Input::get('quiz');
-        $sub=\App\exam::where('quizID','=',$id)->get();
-
-        return Response::json($sub);
-    });
-
-
-    Route::get('/select',function(){
-        $id=Input::get('subject');
-        $sub=\App\exam::where('subject','=',$id)->get();
-
-        return Response::json($sub);
-    });
-
-
-    Route::get('/type1',function(){
-        $id=DB::table('category')
-            ->where('category',Input::get('category'))
-            ->value('id')->get();
-        $sub=\App\librarytype::where('catID','=',$id)->get();
 
         return Response::json($sub);
     });
@@ -390,14 +352,5 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('createquiz', 'createquizController@viewque');
     Route::post('createquiz', 'createquizController@createquiz');
-
-    Route::post('booksearch','booksearchController@searchInventory');
-
-
-    Route::get('booksearch/get/{filename}', array( 'as' => 'getentry', 'uses' => 'booksearchController@get' ));
-    Route::get('booksearch', 'booksearchController@show');
-
-
-
     //
 });
