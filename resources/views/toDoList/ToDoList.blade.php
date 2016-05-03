@@ -2,15 +2,25 @@
 
 @section('content')
 
-    <div class="container">
+
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+        @include('layouts.adminSidenavbar')
+
+    </div>
+
+
+
+{{--    <div class="container">
         <div class="col-md-3 col-md-offset-1">
             <a href="/admin" style="color: blue;">Home</a>
         </div>
         <br>
-        <br>
+        <br>--}}
         {{--<div class="w3-container w3-center w3-animate-opacity">--}}
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-7 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color: burlywood; color: white">To Do List</div>
 

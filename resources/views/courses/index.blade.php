@@ -39,134 +39,144 @@
 
                         <br>
 
-    <div class="col-xs-8">
-        <a href="{{url('/courses/create')}}" class="btn btn-success">Create Lesson</a>
-    </div>
+                        <!--path to create lesson page-->
+
+                        <div class="col-xs-8">
+                            <a href="{{url('/courses/create')}}" class="btn btn-success">Create Lesson</a>
+                        </div>
+
+                        <!--search field-->
+
+                        <div class="col-sm-1">
+                            <input type="text"  align="right" id="search" placeholder="Type to search Courses">
+                        </div>
+
+                        <br><br><br>
 
 
 
-    <div class="col-sm-1">
-        <input type="text"  align="right" id="search" placeholder="Type to search Courses">
-    </div>
+                        <!--Group selection-->
 
-    <br><br><br>
+                        <div class="form-group">
+                            <label for="">Group</label>
 
+                            <select class="form-control input-sm" name="category" id="category">
 
+                                @foreach($categoryname as $category)
 
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
 
-
-    <div class="form-group">
-        <label for="">Group</label>
-
-        <select class="form-control input-sm" name="category" id="category">
-
-            @foreach($categoryname as $category)
-
-                <option value="{{$category->id}}">{{$category->name}}</option>
-
-            @endforeach
-        </select>
+                                @endforeach
+                            </select>
 
 
-    </div>
-
-    <div class="form-group">
-        <label for="">Activity</label>
-        <select class="form-control input-sm" name="subcategory" id="subcategory">
-
-            <option value="" onclick="categorizeCourse"></option>
+                        </div>
 
 
-        </select>
+                        <!--Activity selection-->
 
 
-    </div>
+                        <div class="form-group">
+                            <label for="">Activity</label>
+                            <select class="form-control input-sm" name="subcategory" id="subcategory">
+
+                                <option value="" onclick="categorizeCourse"></option>
 
 
+                            </select>
 
-    <hr>
-    <table class="table table-striped table-bordered table-hover" id="table">
-        <thead>
-        <tr class="bg-info">
-            {{-- <th>Id</th>--}}
-            <th>Name</th>
-            {{--<th>Category</th>--}}
-            <th>Description</th>
-            <th colspan="5">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($courses as $book)
-            <tr>
-                {{--<td>{{ $book->id }}</td>--}}
-                <td>{{ $book->name }}</td>
-                {{--<td>{{ $book->category }}</td>--}}
-                <td>{{ $book->description}}</td>
-                <td><img src="{{asset('Uploads/'.$book->img)}}" height="35" width="30"></td>
-                <td><a href="{{url('courses',$book->id)}}" class="btn btn-primary">Read</a></td>
-                <td><a href="{{route('courses.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
-                <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['courses.destroy', $book->id]]) !!}
+
+                        </div>
+
+                        <!--Table for created course information-->
+
+                        <hr>
+                        <table class="table table-striped table-bordered table-hover" id="table">
+                            <thead>
+                            <tr class="bg-info">
+                                {{-- <th>Id</th>--}}
+                                <th>Name</th>
+                                {{--<th>Category</th>--}}
+                                <th>Description</th>
+                                <th colspan="5">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($courses as $book)
+                                <tr>
+                                    {{--<td>{{ $book->id }}</td>--}}
+                                    <td>{{ $book->name }}</td>
+                                    {{--<td>{{ $book->category }}</td>--}}
+                                    <td>{{ $book->description}}</td>
+                                    <td><img src="{{asset('Uploads/'.$book->img)}}" height="35" width="30"></td>
+                                    <td><a href="{{url('courses',$book->id)}}" class="btn btn-primary">Read</a></td>
+                                    <td><a href="{{route('courses.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
+                                    <td>
+                                        {!! Form::open(['method' => 'DELETE', 'route'=>['courses.destroy', $book->id]]) !!}
 
 
 
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 
 
 
-                    <script>
+                                        <script>
 
-                        $('#category').on('change',function(e){
+                                         /*  ajax for dropdownselection*/
 
-                            console.log(e);
-                            var cat_id= e.target.value;
+                                            $('#category').on('change',function(e){
 
-                            $.get('/ajax-subcat?cat_id=' + cat_id,function(data){
+                                                console.log(e);
+                                                var cat_id= e.target.value;
 
-                                console.log(data);
-                                $('#subcategory').empty();
+                                                $.get('/ajax-subcat?cat_id=' + cat_id,function(data){
 
-                                $.each(data,function(index,subcatObj){
+                                                    console.log(data);
+                                                    $('#subcategory').empty();
 
-
-                                    $('#subcategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+ '</option>');
-
-                                });
-
-                            });
+                                                    $.each(data,function(index,subcatObj){
 
 
+                                                        $('#subcategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+ '</option>');
 
-                        });
+                                                    });
 
-                        var $rows = $('#table tr');
-                        $('#search').keyup(function() {
-                            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-                            $rows.show().filter(function() {
-                                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                                return !~text.indexOf(val);
-                            }).hide();
-                        });
+                                                });
 
 
-                    </script>
 
-                    {!! Form::close() !!}
+                                            });
 
-                </td>
-            </tr>
-        @endforeach
+                                            <!-- script for search course-->
 
-        </div>
+                                            var $rows = $('#table tr');
+                                            $('#search').keyup(function() {
+                                                var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-        </tbody>
+                                                $rows.show().filter(function() {
+                                                    var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                                                    return !~text.indexOf(val);
+                                                }).hide();
+                                            });
 
-    </table>
+
+                                        </script>
+
+                                        {!! Form::close() !!}
+
+                                    </td>
+                                </tr>
+                        @endforeach
+
                     </div>
+
+                    </tbody>
+
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 @stop
 

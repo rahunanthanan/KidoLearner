@@ -38,79 +38,95 @@
                             <br>
 
 
+                            <!--Form for update course-->
+
+                            {!! Form::model($course,['method' => 'PATCH','route'=>['courses.update',$course->id ],'files' => true]) !!}
+
+                                    <!--course name-->
+
+                            <div class="form-group">
+                                {!! Form::label('name', 'Name:') !!}
+                                {!! Form::text('name',null,['class'=>'form-control']) !!}
+                            </div>
+
+                            <!--Error message for course name empty -->
+
+                            @if ($errors->has('name')) <p class="help-block" style="color:red">{{ $errors->first('name') }}</p> @endif
 
 
-    {!! Form::model($course,['method' => 'PATCH','route'=>['courses.update',$course->id ],'files' => true]) !!}
-    <div class="form-group">
-        {!! Form::label('name', 'Name:') !!}
-        {!! Form::text('name',null,['class'=>'form-control']) !!}
-    </div>
+                                    <!--selection for Group-->
 
-    @if ($errors->has('name')) <p class="help-block" style="color:red">{{ $errors->first('name') }}</p> @endif
+                            <div class="form-group">
+                                <label for="">Group</label>
+                                <select class="form-control input-sm" name="category" id="category">
 
+                                    @foreach( $categoryname  as $category)
 
-    <div class="form-group">
-        <label for="">Group</label>
-        <select class="form-control input-sm" name="category" id="category">
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
 
-            @foreach( $categoryname  as $category)
-
-                <option value="{{$category->id}}">{{$category->name}}</option>
-
-            @endforeach
-        </select>
+                                    @endforeach
+                                </select>
+                            </div>
 
 
-    </div>
-    <div class="form-group">
-        <label for="">Activity</label>
-        <select class="form-control input-sm" name="subcategory" id="subcategory">
+                            <!--selection for Activity-->
+
+                            <div class="form-group">
+                                <label for="">Activity</label>
+                                <select class="form-control input-sm" name="subcategory" id="subcategory">
+
+                                    <option value=""></option>
+                                </select>
+
+                            </div>
 
 
-
-            <option value=""></option>
-
-
-        </select>
+                            <!--text field for description-->
 
 
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('description', 'Description:') !!}
-        {!! Form::textarea('description',null,['class'=>'form-control','size' => '5x5']) !!}
-    </div>
+                            <div class="form-group">
+                                {!! Form::label('description', 'Description:') !!}
+                                {!! Form::textarea('description',null,['class'=>'form-control','size' => '5x5']) !!}
+                            </div>
 
 
-    @if ($errors->has('description')) <p class="help-block" style="color:red">{{ $errors->first('description') }}</p> @endif
+                            <!--error message for description field is empty-->
+
+                            @if ($errors->has('description')) <p class="help-block" style="color:red">{{ $errors->first('description') }}</p> @endif
 
 
-    {!! Form::label('date', 'UploadDate:') !!}
-    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy/mm/dd" >
-        {!! Form::text('date',null,['class'=>'form-control']) !!}
-        <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
+                                    <!-- Upload date-->
 
-    <br>
+                            {!! Form::label('date', 'UploadDate:') !!}
+                            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy/mm/dd" >
+                                {!! Form::text('date',null,['class'=>'form-control']) !!}
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
 
-    <div class="form-group">
+                            <br>
 
-        <label for="filefield">Upload Image</label>
-        <input type='file' name="filefield" />
-        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+                            <!-- Upload image file field-->
 
-    </div>
+                            <div class="form-group">
+
+                                <label for="filefield">Upload Image</label>
+                                <input type='file' name="filefield" />
+                                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+
+                            </div>
+
+                            <!--error message for image field is empty-->
+
+                            @if ($errors->has('filefield')) <p class="help-block" style="color:red">{{ $errors->first('filefield') }}</p> @endif
 
 
-    @if ($errors->has('filefield')) <p class="help-block" style="color:red">{{ $errors->first('filefield') }}</p> @endif
+                                    <!--sumbit button-->
 
-
-
-    <div class="form-group">
-        {!! Form::submit('Update',['class' => 'btn btn-primary']) !!}
-    </div>
+                            <div class="form-group">
+                                {!! Form::submit('Update',['class' => 'btn btn-primary']) !!}
+                            </div>
 
 
                         </div>
@@ -120,35 +136,37 @@
         </div>
 
 
-    <script>
+        <script>
 
-        $('#category').on('change',function(e){
+            <!--ajax for dropdown selection-->
 
-            console.log(e);
-            var cat_id= e.target.value;
+            $('#category').on('change',function(e){
 
-            $.get('/ajax-subcat?cat_id=' + cat_id,function(data){
+                console.log(e);
+                var cat_id= e.target.value;
 
-                console.log(data);
-                $('#subcategory').empty();
+                $.get('/ajax-subcat?cat_id=' + cat_id,function(data){
 
-                $.each(data,function(index,subcatObj){
+                    console.log(data);
+                    $('#subcategory').empty();
+
+                    $.each(data,function(index,subcatObj){
 
 
-                    $('#subcategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+ '</option>');
+                        $('#subcategory').append('<option value="'+subcatObj.id+'">'+subcatObj.name+ '</option>');
+
+                    });
 
                 });
+
+
 
             });
 
 
 
-        });
-
-
-
-    </script>
-    {!! Form::close() !!}
+        </script>
+        {!! Form::close() !!}
 
     </div>
 

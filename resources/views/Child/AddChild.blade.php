@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="col-md-2 col-md-offset-0" style="background-color: teal; color: white">
+    {{--<div class="col-md-2 col-md-offset-0" style="background-color: teal; color: white">
         <ul class="nav nav-pills nav-stacked">
             <li ><a class="w3-hover-blue" href="home">Home</a></li>
             <li class="dropdown" >
@@ -16,11 +16,19 @@
             <li><a class="w3-hover-orange" href="#">Menu 2</a></li>
             <li><a class="w3-hover-yellow" href="#">Menu 3</a></li>
         </ul>
-    </div>
+    </div>--}}
 
-    <div class="col-md-2 col-md-offset-0">
-        <div class="container">
-            {{--<div class="w3-container w3-center w3-animate-opacity">--}}
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+     @include('layouts.parentSidenavbar')
+
+      </div>
+
+
+
+     <div class="col-md-2 col-md-offset-0">
+         <div class="container">
+             {{--<div class="w3-container w3-center w3-animate-opacity">--}}
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">

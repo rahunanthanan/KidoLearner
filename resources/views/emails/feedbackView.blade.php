@@ -14,49 +14,54 @@
 </div>
 
 
+<!--container for view feedbacks-->
+
 <div class="col-md-5 col-md-offset-0"></div>
 <div class="container w3-animate-zoom"  >
 
-            <div class="col-md-20 col-md-offset-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading "  style="background-color: #004280; color: white">Feedback</div>
-                    <div class="panel-body" style="background-color: #e6eeff">
+
+    <div class="col-md-20 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading "  style="background-color: #004280; color: white">Feedback</div>
+            <div class="panel-body" style="background-color: #e6eeff">
 
 
-                        <br>
+                <br>
 
-    <table class="table table-striped table-bordered table-hover" >
-        <thead>
-        <tr class="bg-info">
-            <th>Time</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Comment</th>
+                <!--all sent feedback information-->
 
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($feed as $book)
-            <tr>
+                <table class="table table-striped table-bordered table-hover" >
+                    <thead>
+                    <tr class="bg-info">
+                        <th>Time</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
 
-                <td>{{ $book->dateAndTime }}</td>
-                <td>{{ $book->name }}</td>
-                <td> <a href="mailto:{{ $book->email_addr }}">{{ $book->email_addr }}    </a> </td>
-                <td>{{ $book->comment}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($feed as $book)
+                        <tr>
 
-            </tr>
+                            <td>{{ $book->dateAndTime }}</td>
+                            <td>{{ $book->name }}</td>
+                            <td> <a href="mailto:{{ $book->email_addr }}">{{ $book->email_addr }}    </a> </td>
+                            <td>{{ $book->comment}}</td>
 
-        @endforeach
+                        </tr>
 
-        </tbody>
+                    @endforeach
 
-    </table>
+                    </tbody>
 
-                    </div>
-                </div>
+                </table>
+
             </div>
         </div>
     </div>
+</div>
+</div>
 
 
 

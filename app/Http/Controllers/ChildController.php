@@ -66,17 +66,19 @@ class ChildController extends Controller
     {
         ini_set('xdebug.max_nesting_level', 200);
 
-        $name = DB::table('child')->where('parentId', '=', Auth::user()->id)->get();
+        $names = DB::table('child')->where('parentId', '=', Auth::user()->id)->get();
         /*return view('Child.EditChild', [
             'names' => $name
         ]);*/
 
 
-        return view('Child.EditChild', [
+        /*return view('Child.EditChild', [
             'names' => $name
-        ]);
+        ]);*/
 
-        return view('Child.EditChild');
+        //return view('Child.EditChild')->compact();
+
+        return view('Child.EditChild',compact('names'));
     }
 
     function showChildDetails()

@@ -18,9 +18,9 @@
         </ul>
     </div>
 
-    <div class="col-md-2 col-md-offset-0">
+   {{-- <div class="col-md-2 col-md-offset-0">
         <div class="container">
-            {{--<div class="w3-container w3-center w3-animate-opacity">--}}
+            --}}{{--<div class="w3-container w3-center w3-animate-opacity">--}}{{--
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
@@ -59,74 +59,74 @@
                 </div>
                 </div>
 
-            {{--@if (count($values) > 0)--}}
+            --}}{{--@if (count($values) > 0)--}}{{--
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="background-color: burlywood; color: white">Edit Child</div>
 
                         <div class="panel-body" style="background-color: white">
 
-                           {{-- @if(Session::has('success'))
+                           --}}{{-- @if(Session::has('success'))
                                 <div class="alert alert-success">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <strong>Success!</strong> {{ Session::get('message', '') }}
                                 </div>
-                                @endif--}}
+                                @endif--}}{{--
 
 
                                         <!-- New Child Form -->
                                 <form action="{{ url('EditChild') }}" method="POST" class="form-horizontal">
                                     {!! csrf_field() !!}
 
-                                   {{-- @if(Session::has('fail'))
+                                   --}}{{-- @if(Session::has('fail'))
                                         <div class="alert alert-danger">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                             <strong>Warning!</strong> {{ Session::get('message1', '') }}
                                         </div>
-                                        @endif--}}
+                                        @endif--}}{{--
 
                                                 <!-- Child's First Name -->
-                                        <div class="form-group {{--{{ $errors->has('firstName') ? ' has-error' : '' }}--}}">
+                                        <div class="form-group --}}{{--{{ $errors->has('firstName') ? ' has-error' : '' }}--}}{{--">
                                             <label class="col-sm-3 control-label">First Name</label>
 
                                             <div class="col-sm-6">
                                                 <input type="text" name="firstName" id="child-first-name" class="form-control" placeholder={{$reg->fName}}>
 
-                                                {{--@if($errors->has('firstName'))
+                                                --}}{{--@if($errors->has('firstName'))
                                                     <span class="help-block">
                                         <strong>{{$errors->first('firstName')}}</strong>
                                     </span>
-                                                @endif--}}
+                                                @endif--}}{{--
                                             </div>
                                         </div>
 
                                         <!-- Child's Last Name -->
-                                        <div class="form-group {{--{{ $errors->has('lastName') ? ' has-error' : '' }}--}}">
+                                        <div class="form-group --}}{{--{{ $errors->has('lastName') ? ' has-error' : '' }}--}}{{--">
                                             <label for="lastName" class="col-sm-3 control-label">Last Name</label>
 
                                             <div class="col-sm-6">
                                                 <input type="text" name="lastName" id="child-last-name" class="form-control" value="{{ old('lastName') }}">
 
-                                                {{--@if($errors->has('lastName'))
+                                                --}}{{--@if($errors->has('lastName'))
                                                     <span class="help-block">
                                         <strong>{{$errors->first('lastName')}}</strong>
                                     </span>
-                                                @endif--}}
+                                                @endif--}}{{--
                                             </div>
                                         </div>
 
                                         <!-- Child's DOB -->
-                                        <div class="form-group {{--{{ $errors->has('dateOfBirth') ? ' has-error' : '' }}--}}">
+                                        <div class="form-group --}}{{--{{ $errors->has('dateOfBirth') ? ' has-error' : '' }}--}}{{--">
                                             <label for="dateOfBirth" class="col-sm-3 control-label">Date of Birth</label>
 
                                             <div class="col-md-6">
                                                 <input type="date" id="datepicker" name="dateOfBirth" class="form-control" placeholder="Select the date" value="{{ old('dateOfBirth') }}">
 
-                                                {{--@if($errors->has('dateOfBirth'))
+                                                --}}{{--@if($errors->has('dateOfBirth'))
                                                     <span class="help-block">
                                         <strong>{{$errors->first('dateOfBirth')}}</strong>
                                     </span>
-                                                @endif--}}
+                                                @endif--}}{{--
                                             </div>
                                         </div>
 
@@ -148,17 +148,17 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group {{--{{ $errors->has('schoolName') ? ' has-error' : '' }}--}}">
+                                        <div class="form-group --}}{{--{{ $errors->has('schoolName') ? ' has-error' : '' }}--}}{{--">
                                             <label for="schoolName" class="col-sm-3 control-label">School Name</label>
 
                                             <div class="col-sm-6">
                                                 <input type="text" name="schoolName" id="child-school" class="form-control" value="{{ old('schoolName') }}">
 
-                                               {{-- @if($errors->has('schoolName'))
+                                               --}}{{-- @if($errors->has('schoolName'))
                                                     <span class="help-block">
                                         <strong>{{$errors->first('schoolName')}}</strong>
                                     </span>
-                                                @endif--}}
+                                                @endif--}}{{--
                                             </div>
                                         </div>
 
@@ -178,7 +178,7 @@
                     </div>
 
 
-    </div>
+    </div>--}}
                 {{--@endif--}}
     </div>
     </div>
