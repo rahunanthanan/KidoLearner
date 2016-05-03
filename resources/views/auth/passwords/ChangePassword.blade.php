@@ -2,17 +2,22 @@
 
 @section('content')
 
-<div class="container w3-animate-zoom" >
 
-    <div class="col-md-3 col-md-offset-1">
-        <a href="/admin" style="color: blue;">Home</a>
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.parentSidenavbar')
+
+
     </div>
 
-    <br>
-    <br>
+
+<div class="container w3-animate-zoom" >
+
 
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-9 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading" style="background-color: #196719; color: white">Change Password</div>
 

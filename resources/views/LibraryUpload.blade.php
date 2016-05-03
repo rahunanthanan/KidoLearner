@@ -1,6 +1,15 @@
-@extends('bookupload')
+@extends('layouts.app')
 
-@section('contentt3')
+@section('content')
+
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.adminSidenavbar')
+
+
+    </div>
 
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css">
@@ -9,7 +18,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css"></script>
 
 
-  <div align="right">
+  <div align="center">
     <button id="category" class="btn btn-success" type="button"  name="btn" data-toggle="modal" data-target="#viewTable" class="btn btn-primary">Add New Category</button>
     <button id="type" class="btn btn-success" type="button" name="btnn" data-toggle="modal" data-target="#viewTablee" class="btn btn-primary">Add New Type</button>
  </div>

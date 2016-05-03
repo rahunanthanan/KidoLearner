@@ -318,6 +318,35 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('managesub','addsubjectController@editsubject');
     Route::post('addquiz','addquizController@addquiz');
 
+    Route::get('quizmain','quizmainController@getmain');
+    Route::get('addsubject','addsubjectController@getsubject');
+    Route::get('managesub','managesubController@getmanage');
+
+    Route::get('addquiz','addquizController@getquiz');
+    Route::post('addsubject','addsubjectController@addsubject');
+
+    Route::post('managesub','addsubjectController@deletesubject');
+
+    Route::post('addquiz','addquizController@addquiz');
+
+    Route::get('quizpaper', 'quizpaperController@viewquizp');
+
+
+    Route::get('attemptquiz', 'quizpaperController@attempt');
+    Route::post('attemptquiz', 'quizpaperController@searchInventory');
+
+    Route::get('createquiz', 'createquizController@viewque');
+    Route::post('createquiz', 'createquizController@createquiz');
+
+
+    Route::get('viewhelpdesk','helpdeskController@viewreply');
+    Route::get('helpdesk','helpdeskController@gethelpdesk');
+    Route::post('helpdesk','helpdeskController@add');
+
+
+    Route::get('hp_reply','hp_replyController@getpage');
+    Route::post('hp_reply','hp_replyController@edit');
+
 
 //onchange function for excuse request form
     Route::get('/formc',function(){
@@ -332,6 +361,34 @@ Route::group(['middleware' => ['web']], function () {
 
         return Response::json($sub);
     });
+
+    Route::get('/quiz',function(){
+        $id=Input::get('quiz');
+        $sub=\App\exam::where('quizID','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
+
+    Route::get('/select',function(){
+        $id=Input::get('subject');
+        $sub=\App\exam::where('subject','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
+
+
+
+    Route::get('/type1',function(){
+        $id=DB::table('category')
+            ->where('category',Input::get('category'))
+            ->value('id')->get();
+        $sub=\App\librarytype::where('catID','=',$id)->get();
+
+        return Response::json($sub);
+    });
+
 
 
     /* Kavi */
@@ -352,5 +409,12 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('createquiz', 'createquizController@viewque');
     Route::post('createquiz', 'createquizController@createquiz');
+
+
+    Route::post('booksearch','booksearchController@searchInventory');
+
+
+    Route::get('booksearch/get/{filename}', array( 'as' => 'getentry', 'uses' => 'booksearchController@get' ));
+    Route::get('booksearch', 'booksearchController@show');
     //
 });

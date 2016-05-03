@@ -2,20 +2,12 @@
 
 @section('content')
 
-    <div class="col-md-2 col-md-offset-0" style="background-color: teal; color: white">
-        <ul class="nav nav-pills nav-stacked">
-            <li ><a class="w3-hover-blue" href="/home">Home</a></li>
-            <li class="dropdown" >
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu 1 <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="w3-hover-green" href="/task">Child</a></li>
-                    <li><a class="w3-hover-yellow" href="#">Submenu 1-2</a></li>
-                    <li><a class="w3-hover-blue" href="#">Submenu 1-3</a></li>
-                </ul>
-            </li>
-            <li><a class="w3-hover-orange" href="#">Menu 2</a></li>
-            <li><a class="w3-hover-yellow" href="/AddChild">Child</a></li>
-        </ul>
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.parentSidenavbar')
+
+
     </div>
 
     <div class="col-md-2 col-md-offset-0">

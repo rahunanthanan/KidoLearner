@@ -26,6 +26,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+
+    {{-- <link href="css/style.css" rel="stylesheet">--}}
+
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
     <style>
 
        /* header part backgroundImage*/
@@ -166,7 +172,6 @@
 </nav>
 
 <br>
-<br>
 {{--<div class="container">--}}
 
     @yield('content')
@@ -176,6 +181,10 @@
         <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

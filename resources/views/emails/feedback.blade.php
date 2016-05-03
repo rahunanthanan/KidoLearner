@@ -5,13 +5,13 @@
 
 
 
-{{--    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
 
 
         @include('layouts.parentSidenavbar')
 
 
-    </div>--}}
+    </div>
 
 
 

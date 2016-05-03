@@ -1,11 +1,25 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
 
 
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
 
 
-          <div class="container">
-            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
+    @include('layouts.adminSidenavbar')
+
+
+</div>
+
+<!--container-->
+
+
+
+
+
+             <div class="container">
+            <div id="loginbox" style="margin-left: 150px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
                 <div class="panel panel-primary" >
                       <div class="panel-heading">ADD SUBJECTS</div>
 

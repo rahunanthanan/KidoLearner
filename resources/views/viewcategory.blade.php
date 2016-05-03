@@ -1,7 +1,16 @@
 
-@extends('bookupload')
+@extends('layouts.app')
 
-@section('contentt3')
+@section('content')
+
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.adminSidenavbar')
+
+
+    </div>
+
 
  <div class="container">
         <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
@@ -47,12 +56,12 @@
                                           <tr>
 
 
-                                              @foreach($categorys as $category)
+                                              @foreach($count as $category)
 
                                                           <td class="col-sm-2">{{$category->category}}</td>
 
-                                              @foreach($catcount as $cou)
-                                                          <td class="col-sm-2">{{$cou->cont}}</td>
+
+                                                          <td class="col-sm-2">{{$category->Count}}</td>
 
 
 

@@ -1,17 +1,46 @@
 
-@extends('helpDeskmain')
-@section('content3')
+@extends('layouts.app')
+@section('content')
+
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.parentSidenavbar')
+
+
+</div>
+
+<!--container-->
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-7 col-md-offset-0">
+        <div class="row">
+            <div class="col-md-20 col-md-offset-0">
+                <div class="panel panel-default">
+                    <div class="panel-heading "  style="background-color: #004280; color: white">Course Materials</div>
+                    <div class="panel-body" style="background-color: #e6eeff">
+
+
+                        <br>
+
+
+
+
 
 <h2 align="center"><font color="red" ><strong>Student Help Desks</strong></font></h2>
 
 <h3 align="center"><font color="orange" ><strong>We are here to help you !!!!</strong></font></h3>
 
-<img align="center" src="http://www.it-winners.com/image/page/help-desk.jpg"  >
+<img align="center" src="http://www.it-winners.com/image/page/help-desk.jpg" width="100%" >
 
 <h4 align="center"><font color="black" ><strong>Genral Information</strong></font></h4>
 <br>
-<h5><strong><font color="green"> The Student Help Desk provides free support for questions about: </font> </strong></h5>
-<br><br><br>
+<h5><strong><font color="green">Student Help Desk provides free support for questions about:</font> </strong></h5>
+<br><br>
 
 
 <div class="container"></div>
@@ -159,11 +188,21 @@
 
 <br><br>
 
-   
+
+   <div align="center">
     <h4><font color="green" ><strong>OR</strong></font></h4>
-    <h5><font color="BLACK" ><strong>Email : <a href="mailto:rahunanthanan@gmail.com?subject=YourSubject&body=Test Body">Mail Me</a> </strong></font></h5>
+    <h5><font color="#3385ff" ><strong><a href="mailto:rahunanthanan@gmail.com?subject=YourSubject&body=Test Body" >Contact Admin </a> </strong></font></h5>
+   <div>
 
 <br><br><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
   <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
   <script type="text/javascript">
     $(function () {
@@ -173,6 +212,8 @@
       });
     });
   </script>
+
+
 
 
 @stop

@@ -191,19 +191,6 @@
 
                                             <!-- Delete Button -->
                                             <td>
-                                                <form action="{{ url('/EditChild')}}">
-                                                    {!! csrf_field() !!}
-                                                    {{--{!! method_field('DELETE') !!}--}}
-
-                                                    {{--<input type="hidden" name="_method" value="EDIT">--}}
-
-                                                    <button type="submit" class="btn btn-info">
-                                                        <i class="glyphicon glyphicon-pencil"></i> Edit
-                                                    </button>
-                                                </form>
-                                            </td>
-
-                                            <td>
                                                 <form action="{{ url('AddChild/'.$child->id) }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     {!! method_field('DELETE') !!}

@@ -1,19 +1,46 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
     {{--quizmain--}}
 
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.parentSidenavbar')
+
+
+</div>
+
+
+
+
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-7 col-md-offset-0">
+        <div class="row">
+
+
+            <div class="container">
+                <div id="loginbox" align="center" class="col-md-8 col-md-offset-0">
+                    <div class="panel panel-primary" >
+                        <div class="panel-heading">Library Materials</div>
+
+
 {{--container box--}}
 
- <div class="container">
-        <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
-            <div class="panel panel-info" >
+ <div class="container" >
+        <div id="loginbox" style="margin-left:-2.75%" class="mainbox col-md-8 col-md-offset-2" >
+            <div class="panel panel-info">
 
 
                     <div style="padding-top:30px" class="panel-body" >
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                         <h3 align="center"><strong><font color="">Library Materials</font></strong></h3>
+
                          <h5 align="center"><strong><font color="">Library Materials can be downloaded from here</font></strong></h5>
                          <br><hr style="height:1px;border:none;color:deepskyblue;background-color:deepskyblue;" /><br>
 

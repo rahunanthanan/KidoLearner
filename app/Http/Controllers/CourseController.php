@@ -225,6 +225,8 @@ class CourseController extends Controller{
 
     }
 
+
+
     /**
      * Upload the  edited coursedetails
      *
@@ -297,7 +299,8 @@ class CourseController extends Controller{
      */
 
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         Course::find($id)->delete();
         Alert::success('Deleted');
@@ -305,7 +308,6 @@ class CourseController extends Controller{
         return redirect('courses');
 
     }
-
 
 
 

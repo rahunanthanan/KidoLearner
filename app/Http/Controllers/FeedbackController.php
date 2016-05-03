@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Category;
 use App\Email;
 use App\Feedback;
+use App\Fileentry;
 use Carbon\Carbon;
 use App\Course;
 use App\Http\Requests;
@@ -80,7 +82,22 @@ class FeedbackController extends Controller{
 
             Alert::message('Thanks for comment!')->persistent('Close');
 
-            return view('emails.feedback');
+
+            $categoryname=Category::all();
+            $entries = Fileentry::all();
+
+            $lessonName=DB::table('courses')
+                ->join('fileentries', 'courses.id', '=', 'fileentries.lesson')
+
+                ->select('courses.name')
+                ->get();
+
+
+            return view('showCourseMaterials.showParent', compact('entries','courses','categoryname','lessonName'));
+
+
+
+
         }
 
         else

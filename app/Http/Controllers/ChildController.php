@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use View;
 use Auth;
+use Mail;
 use App\Task;
 //use Item;
 use App\Item;
@@ -131,6 +132,21 @@ class ChildController extends Controller
             if (preg_match("^[2-2][0-0][0-1][0-2]-[0-1][0-9]-[0-3][0-9]$^",$date) || preg_match("^[2-2][0-0][0-0][6-9]-[0-1][0-9]-[0-3][0-9]$^",$date) )
             {
                 $child->save();
+
+                //send mail
+                $data = ['title' => 'You have registered your child succesfully'];
+                Mail::send('auth.passwords.Content', $data, function ($m)
+                {
+
+                    $mail = Auth::user()->email;
+                    $name = Auth::user()->name;
+
+
+                    $m->to($mail, $name);
+                    $m->subject('Child Registration for Kido Learners');
+                });
+
+
                 return Redirect::to('/AddChild')
                     ->with('success', true)->with('message','Your child is successfully registered');
             }

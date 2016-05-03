@@ -26,16 +26,44 @@ class SettingsController extends Controller
      */
     public function authenticate()
     {
-        $email=Input::get('email');
-        $password = Input::get('password');
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            // Authentication passed...
-            if(Auth::user()->name == 'Admin')
-                return Redirect::to('courses');
-            elseif(Auth::attempt (['email' => $email, 'password' => $password]))
-                return Redirect::to('/showParent');
-            else{
-                return view('errors');
+        ini_set('xdebug.max_nesting_level', 200);
+
+        $validator = Validator::make(Input::all(),
+            array(
+                'email'       => 'required|email',
+                'password'       => 'required|min:6',
+            )
+        );
+
+        if($validator->fails())
+        {
+            return Redirect::to('/login')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        else
+        {
+            $email=Input::get('email');
+            $password = Input::get('password');
+
+            if (Auth::attempt(['email' => $email, 'password' => $password])) {
+                // Authentication passed...
+                if(Auth::user()->name == 'Admin')
+                    return Redirect::to('courses');
+                elseif(Auth::attempt (['email' => $email, 'password' => $password]))
+                    return Redirect::to('/showParent');
+                else
+                {
+                    return Redirect::to('/login')
+                        ->with('fail', true)->with('message1','Your Username and Password are incorrect , Try Again');
+                }
+            }
+
+            else
+            {
+                return Redirect::to('/login')
+                    ->with('fail', true)->with('message1','Your Username and Password are incorrect , Try Again');
             }
         }
     }

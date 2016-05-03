@@ -1,7 +1,14 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
 
 
+    <div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+        @include('layouts.parentSidenavbar')
+
+
+    </div>
 
                     <section class="content">
                                   <div class="row" align="center">

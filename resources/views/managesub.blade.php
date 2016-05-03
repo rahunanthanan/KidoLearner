@@ -1,15 +1,28 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
 
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
 
 
+    @include('layouts.adminSidenavbar')
 
 
+</div>
 
-          <div class="container">
-            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
+<!--container-->
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-7 col-md-offset-0">
+        <div class="row">
+
+
+            <div class="container">
+            <div id="loginbox" align="center" class="col-md-8 col-md-offset-0">
                 <div class="panel panel-primary" >
-                  <div class="panel-heading">MANAGE SUBJECTS</div>
+                  <div class="panel-heading">Manage Subject</div>
 
                       <div style="padding-top:30px" class="panel-body" >
 
@@ -218,6 +231,11 @@
             </div>
      </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+        </div>
+    </div>
 @stop

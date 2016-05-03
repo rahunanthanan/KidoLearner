@@ -1,9 +1,33 @@
+@extends('layouts.app')
 
-@extends('helpDeskmain')
-@section('content3')
 
- <br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;
+@section('content')
+
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.parentSidenavbar')
+
+
+</div>
+
+<!--container-->
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-9 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-20 col-md-offset-0">
+                <div class="panel panel-default">
+                    <div class="panel-heading "  style="background-color: #004280; color: white">Help Desk</div>
+                    <div class="panel-body" style="background-color: #e6eeff">
+
+
+                        <br>
+
  
 <div id="exTab1" class="container"> 
 <ul  class="nav nav-pills">
@@ -20,7 +44,7 @@
 <br><br><br>
 
  <div class="container">
-            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
+            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-7">
                 <div class="panel panel-primary" >
                       <div class="panel-heading">VIEW REPLY</div>
 
@@ -318,11 +342,20 @@
   </div>
 </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 
 <!-- Bootstrap core JavaScript
-    ================================================== -->
+                ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

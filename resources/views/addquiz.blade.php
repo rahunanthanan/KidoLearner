@@ -1,10 +1,28 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
 
-  <div class="container">
-            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
-                <div class="panel panel-primary" >
-                      <div class="panel-heading">ADD QUESTION</div>
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.adminSidenavbar')
+
+
+</div>
+
+<!--container-->
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-7 col-md-offset-0">
+        <div class="row">
+
+
+            <div class="container">
+                <div id="loginbox" align="center" class="col-md-8 col-md-offset-0">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">Add Question</div>
 
                       <div style="padding-top:30px" class="panel-body" >
 
@@ -209,6 +227,19 @@
                 </div>
 
 
+
+                    <!--container for question-->
+
+                    <div class="col-md-2 col-md-offset-0"></div>
+                    <div class="container w3-animate-zoom">
+                        <div class="col-md-7 col-md-offset-0">
+                            <div class="row">
+
+
+                        <div class="container">
+                            <div id="loginbox" align="center" class="col-md-8" style="left: -13.25%">
+                                <div class="panel panel-primary">
+
                   @foreach($quizz as $quiz)
 
                      <br>
@@ -335,6 +366,20 @@
 
      </div>
 
+</div>
+        </div>
+    </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
 
 
 @stop

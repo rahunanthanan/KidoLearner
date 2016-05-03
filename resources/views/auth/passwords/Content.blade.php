@@ -1,3 +1,3 @@
-Kido Learners!!!
+Dear Parents,
 {{$title}}
 

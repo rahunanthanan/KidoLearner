@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html>
-<body background="http://thumbs.dreamstime.com/z/framing-misc-usage-people-different-age-small-teenage-children-29086404.jpg">
-    {{--<script src="jquery-2.1.1.js" language="javascript"></script>--}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    {{--<script src="{{ asset('/css/js/bootstrap.min.js') }}"></script>--}}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    {{--<!-- <link href="{{ asset('/css/css/bootstrap.min.css') }}" rel="stylesheet">-->--}}
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    {{-- <link href="css/style.css" rel="stylesheet">--}}
+@extends('layouts.app')
+@section('content')
 
 
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
+        <!-- side navigation bar-->
 
 
 
-    <!-- These links the date picker-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
 
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    @include('layouts.adminSidenavbar')
 
 
-</head>
-<body >
+</div>
 
+
+<div class="container">
+    <div id="loginbox" style="margin-left: 150px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
+        <div class="panel panel-primary" >
 
 <h1 align="center"><font color="purple"><strong>Welcome TO quiz!!!!</strong></font> </h1>
 
@@ -57,29 +46,7 @@
     </select>
 
   </label>
-      <script>
 
-                      $('#subject').on('change',function(e){
-                        console.log(e);
-
-                        var po=e.target.value;
-                        console.log(po);
-                        $.get('/select?subject='+po,function(data){
-
-   
-                           $.each(data,function(index, zoneObj){
-                          $('#quiz').append('<option value="'+zoneObj.quizID+'">'+zoneObj.quizID+'</option>');
-
-                   
-
-
-                      });
-
-    
-                     });
-                });
-
-        </script>   
 
     
                  
@@ -112,44 +79,7 @@
     </div>
 
 
-    <script>
-    function startTimer(duration, display) {
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        // get the number of seconds that have elapsed since 
-        // startTimer() was called
-        diff = duration - (((Date.now() - start) / 1000) | 0);
 
-        // does the same job as parseInt truncates the float
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds; 
-
-        if (diff <= 0) {
-            // add one second so that the count down starts at the full duration
-            // example 05:00 not 04:59
-            start = Date.now() + 1000;
-        }
-    };
-    // we don't want to wait a full second before the timer starts
-    timer();
-    setInterval(timer, 1000);
-}
-
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
-
-</script>
 
      
 
@@ -189,6 +119,103 @@ window.onload = function () {
 
                              @endif
 
-</body>
-</html>
 
+
+</div>
+
+    </div>
+
+</div>
+@stop
+{{--<script src="jquery-2.1.1.js" language="javascript"></script>--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{{--<script src="{{ asset('/css/js/bootstrap.min.js') }}"></script>--}}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+{{--<!-- <link href="{{ asset('/css/css/bootstrap.min.css') }}" rel="stylesheet">-->--}}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+{{-- <link href="css/style.css" rel="stylesheet">--}}
+
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.8/css/jquery.dataTables.css">
+
+
+
+<!-- These links the date picker-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+
+
+<script>
+
+$('#subject').on('change',function(e){
+        console.log(e);
+
+        var po=e.target.value;
+        console.log(po);
+        $.get('/select?subject='+po,function(data){
+
+
+            $.each(data,function(index, zoneObj){
+                $('#quiz').append('<option value="'+zoneObj.quizID+'">'+zoneObj.quizID+'</option>');
+
+
+
+
+            });
+
+
+        });
+    });
+
+
+
+
+</script>
+
+<script>
+    function startTimer(duration, display) {
+        var start = Date.now(),
+                diff,
+                minutes,
+                seconds;
+        function timer() {
+            // get the number of seconds that have elapsed since
+            // startTimer() was called
+            diff = duration - (((Date.now() - start) / 1000) | 0);
+
+            // does the same job as parseInt truncates the float
+            minutes = (diff / 60) | 0;
+            seconds = (diff % 60) | 0;
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (diff <= 0) {
+                // add one second so that the count down starts at the full duration
+                // example 05:00 not 04:59
+                start = Date.now() + 1000;
+            }
+        };
+        // we don't want to wait a full second before the timer starts
+        timer();
+        setInterval(timer, 1000);
+    }
+
+    window.onload = function () {
+        var fiveMinutes = 60 * 5,
+                display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
+
+</script>

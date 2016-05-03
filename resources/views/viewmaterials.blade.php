@@ -1,10 +1,24 @@
 
-@extends('bookupload')
+@extends('layouts.app')
 
-@section('contentt3')
+@section('content')
+
+
+
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.adminSidenavbar')
+
+
+</div>
+
 
  <div class="container">
-        <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-12 col-md-offset-2 col-sm-9 col-sm-offset-4">
+        <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-12 col-md-offset-0 col-sm-9 col-sm-offset-4">
             <div class="panel panel-info" >
 
 
@@ -39,7 +53,7 @@
                                                       <th class="col-sm-2">Author</th>
                                                       <th class="col-sm-2">Published Date</th>
                                                       <th class="col-sm-2">Published By</th>
-                                                      <th class="col-sm-2">Meterial</th>
+                                                      <th class="col-sm-2">Material</th>
                                                       <th class="col-sm-2">Description</th>
 
 
@@ -89,16 +103,16 @@
 
                 {{--links using for data tables--}}
 
-             <script src="js/jquery.min.js"></script>
+           {{--  <script src="js/jquery.min.js"></script>
              <script src="js/bootstrap.min.js"></script>
-             <script src="js/scripts.js"></script>
+             <script src="js/scripts.js"></script>--}}
 
 
 
-             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      {{--       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--}}
              <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
-             <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+             {{--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>--}}
 
 
                {{-- data table--}}

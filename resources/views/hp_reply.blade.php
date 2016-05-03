@@ -1,9 +1,44 @@
+@extends('layouts.app')
 
-@extends('helpDeskmain')
-@section('content3')
 
- <br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;
+@section('content')
+
+
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.adminSidenavbar')
+
+
+</div>
+
+<!--container-->
+
+<div class="col-md-2 col-md-offset-0"></div>
+<div class="container w3-animate-zoom">
+    <div class="col-md-9 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-20 col-md-offset-0">
+                <div class="panel panel-default">
+                    <div class="panel-heading "  style="background-color: #004280; color: white">Help Desk</div>
+                    <div class="panel-body" style="background-color: #e6eeff">
+
+
+                        <br>
+
+
+
+
+
+
+
+
+
+                        <br>
+
  
 <div id="exTab1" class="container"> 
 <ul  class="nav nav-pills">
@@ -38,10 +73,10 @@
 
                       
 
-<br><br><br>
+<br><br>
 
  <div class="container">
-            <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
+            <div id="loginbox"  class="mainbox col-md-8 col-md-offset-0">
                 <div class="panel panel-primary" >
                       <div class="panel-heading">VIEW REPLY</div>
 
@@ -75,17 +110,7 @@
                                                           <td class="col-sm-2">{{$help->description}}</td>
                                                           <td class="col-sm-2">{{$help->reply}}</td>
 
-                                              <script>
-                                                     var cell = $('td');
 
-                                                     cell.each(function() {
-                                                         var cell_value = $(this).html();
-                                                         if ((cell_value == "Not Replied")) {
-                                                             $(this).css({'background' : '#33CC00'});
-                                                         } 
-                                                     });
-                                             </script>
-                                                          
 
                          <td align="center">
                             <a type="button" class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#{{$help->HID}}"></a>
@@ -399,7 +424,13 @@
   </div>
 </div>
 
+</div>
+                </div>
+            </div>
+        </div>
 
+    </div>
+</div>
 
 
 <!-- Bootstrap core JavaScript
@@ -409,9 +440,20 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
-            
-                 
+            {{--    color change for Not Replied--}}
 
+
+
+                <script>
+                var cell = $('td');
+
+                cell.each(function() {
+                var cell_value = $(this).html();
+                if ((cell_value == "Not Replied")) {
+                $(this).css({'background' : '#e60000'});
+                }
+                });
+                </script>
 
                 {{--links using for data tables--}}
 

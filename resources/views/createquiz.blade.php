@@ -1,13 +1,23 @@
-@extends('quizmain')
+@extends('layouts.app')
 @section('content')
 
+
+        <!-- side navigation bar-->
+
+<div class="col-md-2 col-md-offset-0" style="background-color:  #004280; color: white">
+
+
+    @include('layouts.adminSidenavbar')
+
+
+</div>
 
 
 
           <div class="container">
             <div id="loginbox" style="margin-left: 50px" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4">
                 <div class="panel panel-primary" >
-                      <div class="panel-heading">VIEW ALL QUESTIONS</div>
+                      <div class="panel-heading">VIEW All Questions</div>
 
                       <div style="padding-top:30px" class="panel-body" >
 
@@ -156,34 +166,12 @@
 
 
 
-             <script src="js/jquery.min.js"></script>
-             <script src="js/bootstrap.min.js"></script>
-             <script src="js/scripts.js"></script>
 
 
 
-             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-             <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
-             <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-
-               {{-- data table--}}
-                  <script>
-                    $(document).ready( function () {
-                         $('#table_ID').DataTable().columnFilter()(
-                          {
-                             "lengthMenu": [[2, 4, 6, -1], [2, 4, 6, "All"]]
-
-
-                          } );
-
-                       });
-                  </script>
-
-
-
-
+                <div class="container">
+                    <div id="loginbox" style="margin-left:-3%" class="mainbox col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-4" sy>
+                        <div class="panel panel-primary" >
                          <div class="panel-default">
                               <div class="panel-body">
                                   <table id="table_ID" class="table table-hover table-condensed table-bordered" >
@@ -260,33 +248,7 @@
                                                                         @if ($errors->has('answer')) <p class="help-block"><font color="red">{{ $errors->first('answer') }}</font></p> @endif
                                                                         </div>
                                                                    </div>
-                                                                     
-                    <script>
 
-                      $('#quesid').on('change',function(e){
-                        console.log(e);
-
-                        var po=e.target.value;
-                        console.log(po);
-                        $.get('/ques?quesid='+po,function(data){
-
-
-                           $.each(data,function(index, zoneObj){
-                          $('#question').append('<option value="'+zoneObj.question+'">'+zoneObj.question+'</option>');
-
-                        });
-                           
-                          $.each(data,function(index, zoneObj){
-                          document.getElementById("answer").value=zoneObj.answer;
-
-
-                      });
-
-                     });
-
-                    });
-
-        </script>
 
 
 
@@ -305,9 +267,6 @@
 
                                  {!!  Form::close() !!}
 
-
-
-                                                  </div>
 
 
 
@@ -339,5 +298,59 @@
 
 
 
+
+
+<script>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.8/js/jquery.dataTables.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+{{-- data table--}}
+<script>
+    $(document).ready( function () {
+        $('#table_ID').DataTable().columnFilter()(
+                {
+                    "lengthMenu": [[2, 4, 6, -1], [2, 4, 6, "All"]]
+
+
+                } );
+
+    });
+
+
+    $('#quesid').on('change',function(e){
+        console.log(e);
+
+        var po=e.target.value;
+        console.log(po);
+        $.get('/ques?quesid='+po,function(data){
+
+
+            $.each(data,function(index, zoneObj){
+                $('#question').append('<option value="'+zoneObj.question+'">'+zoneObj.question+'</option>');
+
+            });
+
+            $.each(data,function(index, zoneObj){
+                document.getElementById("answer").value=zoneObj.answer;
+
+
+            });
+
+        });
+
+    });
+
+
+</script>
 
 @stop
