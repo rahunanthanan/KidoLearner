@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -31,34 +32,80 @@ class ChildController extends Controller
     {
         ini_set('xdebug.max_nesting_level', 200);
 
-        $childs = Child::orderBy('created_at', 'asc')->get();
+        $user = DB::table('child')->where('parentId', '=', Auth::user()->id)->get();
         return view('Child.AddChild', [
-            'childs' => $childs
+            'childs' => $user
         ]);
 
         return view('Child.AddChild');
     }
 
     /**
-     * Add tasks to Child
+     * Show the Edit Child
+     *
+     * @return \Illuminate\Http\Response
+     */
+    /*public function getEditChildView()
+    {
+        ini_set('xdebug.max_nesting_level', 200);
+
+        $name = DB::table('child')->where('parentId', '=', Auth::user()->id)->get();
+        return view('Child.EditChild', [
+            'names' => $name
+        ]);
+
+        return view('Child.EditChild');
+    }*/
+
+    /**
+     * Edit Child
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function pushChild()
+    {
+        ini_set('xdebug.max_nesting_level', 200);
+
+        $name = DB::table('child')->where('parentId', '=', Auth::user()->id)->get();
+        /*return view('Child.EditChild', [
+            'names' => $name
+        ]);*/
+
+
+        return view('Child.EditChild', [
+            'names' => $name
+        ]);
+
+        return view('Child.EditChild');
+    }
+
+    function showChildDetails()
+    {
+        $value = Input::get('child');
+        $values = DB::table('child')->where('parentId', '=', $value)->first();
+
+        $reg=Child::find($value);
+
+        return view("Child.EditChild", compact('reg'));
+    }
+
+    /**
+     * Add Child
      *
      * @return \Illuminate\Http\Response
      */
     function postChild()
     {
+        ini_set('xdebug.max_nesting_level', 200);
+
         $validator = Validator::make(Input::all(),
             array(
-                'fName' => 'required|alpha',
-                'lName' => 'required|alpha',
-                /*'dateOfBirth' => 'required',
-                'grade' => 'required',*/
-                'school' => 'required'
+                'firstName' => 'required|alpha',
+                'lastName' => 'required|alpha',
+                'dateOfBirth' => 'required',
+                'schoolName' => 'required'
             )
         );
-
-        /* $validator = Validator::make($request->all(), [
-             'name' => 'required|max:255',
-         ]);*/
 
         if ($validator->fails()) {
             return redirect('/AddChild')
@@ -66,18 +113,33 @@ class ChildController extends Controller
                 ->withErrors($validator);
         }
 
-        // Create The Child...
-        $child = new Child;
-        $child->fName=Input::get('fName');
-        $child->lName = Input::get('lName');
-        $child->dateOfBirth = Input::get('cDob');
-        $child->grade = Input::get('cGrade');
-        $child->school = Input::get('school');
-        $child->save();
+        else
+        {
+            // Create The Child...
+            $child = new Child;
+            $child->parentId = Auth::user()->id;
+            $child->fName=Input::get('firstName');
+            $child->lName = Input::get('lastName');
+            $child->dateOfBirth = Input::get('dateOfBirth');
+            $child->grade = Input::get('cGrade');
+            $child->school = Input::get('schoolName');
 
-        return redirect('/AddChild');
+            $date = Input::get('dateOfBirth');
+
+            if (preg_match("^[2-2][0-0][0-1][0-2]-[0-1][0-9]-[0-3][0-9]$^",$date) || preg_match("^[2-2][0-0][0-0][6-9]-[0-1][0-9]-[0-3][0-9]$^",$date) )
+            {
+                $child->save();
+                return Redirect::to('/AddChild')
+                    ->with('success', true)->with('message','Your child is successfully registered');
+            }
+
+            else
+            {
+                return Redirect::to('/AddChild')
+                    ->with('fail', true)->with('message1','Please enter valid Date of Birth, Try Again');
+            }
+        }
     }
-
 
     /**
      * Delete tasks from Child

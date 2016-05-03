@@ -15,12 +15,13 @@ class Child extends Model
     public static $rules = array(
 
         'id' => 'required',
-        'parentId' => 'required',
-        'fName' => 'required|alpha',
-        'lName' => 'required|alpha',
+        /*'parentId' => 'required'*/
+        'firstName' => 'required|alpha',
+        'lastName' => 'required|alpha',
+        'dateOfBirth' => 'required',
         /*'dateOfBirth' => '',
         'grade' => 'required',*/
-        'school' => 'required|alpha'
+        'schoolName' => 'required|alpha'
 
     );
 }
