@@ -16,5 +16,6 @@
         <li><a class="w3-hover-white" href="/category">Group</a></li>
         <li><a class="w3-hover-white" href="/emails">View Feedback</a></li>
         <li><a class="w3-hover-white" href="/task">To Do List</a></li>
+        <li><a class="w3-hover-white" href="/hp_reply">Help Desk</a></li>
 
     </ul>

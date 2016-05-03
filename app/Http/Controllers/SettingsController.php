@@ -33,7 +33,7 @@ class SettingsController extends Controller
             if(Auth::user()->name == 'Admin')
                 return Redirect::to('courses');
             elseif(Auth::attempt (['email' => $email, 'password' => $password]))
-                return Redirect::to('/home');
+                return Redirect::to('/showParent');
             else{
                 return view('errors');
             }

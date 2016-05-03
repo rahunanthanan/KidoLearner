@@ -80,6 +80,32 @@ class FileController extends Controller {
 
 
     /**
+     * View the uploaded file details to Parents
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showParents()
+    {
+
+
+        $categoryname=Category::all();
+        $entries = Fileentry::all();
+
+        $lessonName=DB::table('courses')
+            ->join('fileentries', 'courses.id', '=', 'fileentries.lesson')
+
+            ->select('courses.name')
+            ->get();
+
+
+        return view('showCourseMaterials.showParent', compact('entries','courses','categoryname','lessonName'));
+
+
+    }
+
+
+    /**
      * Store the details of uploaded file in database
      *
      * @return \Illuminate\Http\Response
